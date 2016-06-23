@@ -1,35 +1,52 @@
 <template>
-  <div id="app">
-    <img class="logo" src="./assets/logo.png">
-    <hello></hello>
-    <p>
-      Welcome to your Vue.js app!
-    </p>
-    <p>
-      To get a better understanding of how this boilerplate works, check out
-      <a href="http://vuejs-templates.github.io/webpack" target="_blank">its documentation</a>.
-      It is also recommended to go through the docs for
-      <a href="http://webpack.github.io/" target="_blank">Webpack</a> and
-      <a href="http://vuejs.github.io/vue-loader/" target="_blank">vue-loader</a>.
-      If you have any issues with the setup, please file an issue at this boilerplate's
-      <a href="https://github.com/vuejs-templates/webpack" target="_blank">repository</a>.
-    </p>
-    <p>
-      You may also want to checkout
-      <a href="https://github.com/vuejs/vue-router/" target="_blank">vue-router</a> for routing and
-      <a href="https://github.com/vuejs/vuex/" target="_blank">vuex</a> for state management.
-    </p>
+  <div id="app" class="container">
+    <div class="todo-wrapper">
+      <todo-header></todo-header>
+      <div class="todo-content">
+        <todo-report></todo-report>
+        <todo-list :collection="listState.items"></todo-list>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Hello from './components/Hello'
+import Header from './components/Header'
+import Report from './components/Report'
+import TodoList from './components/TodoList'
+
+import ListStore from './ListStore'
+
 
 export default {
-  components: {
-    Hello
-  }
+    data: function () {
+        return {
+            listState: ListStore.state
+        }
+    },
+    ready: function () {
+        ListStore.load();
+    },
+    created: function () {
+        window.addEventListener('click', this.hideAction);
+    },
+    beforeDestory: function () {
+        window.removeEventListener('click', this.hideAction);
+    },
+    methods: {
+        /* Hide task action */
+        hideAction: function () {
+            $('.action-popup').removeClass('show');
+        }
+    },
+    components: {
+        'todo-header': Header,
+        'todo-report': Report,
+        'todo-list': TodoList
+    }
 }
+
 </script>
 
 <style>
