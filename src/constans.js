@@ -106,3 +106,87 @@ export function getWeatherIconClass(condid) {
     return icon;
 
 }
+
+
+export var testForecast = [
+    {
+        "code": "4",
+        "date": "24 Jun 2016",
+        "day": "Fri",
+        "high": "87",
+        "low": "75",
+        "text": "Thunderstorms"
+    },
+    {
+        "code": "11",
+        "date": "25 Jun 2016",
+        "day": "Sat",
+        "high": "75",
+        "low": "68",
+        "text": "Showers"
+    },
+    {
+        "code": "26",
+        "date": "26 Jun 2016",
+        "day": "Sun",
+        "high": "73",
+        "low": "65",
+        "text": "Cloudy"
+    },
+    {
+        "code": "47",
+        "date": "27 Jun 2016",
+        "day": "Mon",
+        "high": "76",
+        "low": "70",
+        "text": "Scattered Thunderstorms"
+    },
+    {
+        "code": "4",
+        "date": "28 Jun 2016",
+        "day": "Tue",
+        "high": "79",
+        "low": "73",
+        "text": "Thunderstorms"
+    },
+    {
+        "code": "4",
+        "date": "29 Jun 2016",
+        "day": "Wed",
+        "high": "81",
+        "low": "75",
+        "text": "Thunderstorms"
+    },
+    {
+        "code": "4",
+        "date": "30 Jun 2016",
+        "day": "Thu",
+        "high": "82",
+        "low": "74",
+        "text": "Thunderstorms"
+    },
+    {
+        "code": "4",
+        "date": "01 Jul 2016",
+        "day": "Fri",
+        "high": "87",
+        "low": "77",
+        "text": "Thunderstorms"
+    },
+    {
+        "code": "4",
+        "date": "02 Jul 2016",
+        "day": "Sat",
+        "high": "92",
+        "low": "81",
+        "text": "Thunderstorms"
+    },
+    {
+        "code": "4",
+        "date": "03 Jul 2016",
+        "day": "Sun",
+        "high": "89",
+        "low": "79",
+        "text": "Thunderstorms"
+    }
+];
