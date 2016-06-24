@@ -33,8 +33,8 @@
         var d = new Date();
         this.date = d.getDate();
         var mDate = moment(d);
-        this.weekDay = mDate.weekday();
-        this.month = mDate.month();
+        this.weekDay = mDate.format('dddd');
+        this.month = mDate.format('MMMM');
         this.year = mDate.year();
       },
       methods: {
