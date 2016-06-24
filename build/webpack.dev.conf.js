@@ -32,3 +32,5 @@ module.exports = merge(baseWebpackConfig, {
     })
   ]
 })
+
+console.log('dev.conf');

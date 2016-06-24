@@ -12,7 +12,7 @@
 
 <script>
 import Hello from './components/Hello'
-import Header from './components/Header'
+import Header from './components/Header/Header'
 import Report from './components/Report'
 import TodoList from './components/TodoList'
 
