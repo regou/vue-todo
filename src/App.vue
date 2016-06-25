@@ -19,6 +19,8 @@ import TodoList from './components/TodoList'
 import ListStore from './ListStore'
 
 
+
+
 export default {
     data: function () {
         return {
@@ -27,6 +29,8 @@ export default {
     },
     ready: function () {
         ListStore.load();
+
+        new Vidage('#VidageVideo');
     },
     created: function () {
         window.addEventListener('click', this.hideAction);
@@ -54,7 +58,10 @@ html {
   height: 100%;
 }
 
-body {
+body{
+    height:100%;
+}
+#master-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
