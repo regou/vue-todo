@@ -40,9 +40,9 @@
 
 
                     <div class="row password">
-            <span class="icon lock">
-              <i icon="lock" class="icon-lock-gray icon_sign"></i>
-            </span>
+                    <span class="icon lock">
+                      <i icon="lock" class="icon-lock-gray icon_sign"></i>
+                    </span>
                         <input type="password" required="" placeholder="密码" name="password" class="required" id="set-password" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;" autocomplete="off">
                         <span class="input-bar"></span>
                         <div class="error">
@@ -68,18 +68,18 @@
                         使用第三方账户登录  </div>
                     <ul class="sns">
                         <li class="weibo">
-                            <a title="微博" hidefocus="true" href="https://api.weibo.com/oauth2/authorize?client_id=18974718&amp;response_type=code&amp;redirect_uri=https://www.dida365.com/sign/weibo&amp;scope=follow_app_official_microblog">
+                            <a title="微博" hidefocus="true" href="">
                                 <i class="icon_sign icon-weibo"></i>
                             </a>
                         </li>
                         <li class="wechat second">
 
-                            <a title="微信" hidefocus="true" href="https://open.weixin.qq.com/connect/qrconnect?appid=wxf1429a73d311aad4&amp;redirect_uri=https://dida365.com/sign/wechat&amp;response_type=code&amp;scope=snsapi_login" id="wechat_login_link">
+                            <a title="微信" hidefocus="true" href="">
                                 <i class="icon_sign icon-wechat"></i>
                             </a>
                         </li>
                         <li class="qq">
-                            <a title="QQ" hidefocus="true" href="https://graph.qq.com/oauth2.0/authorize?client_id=101139917&amp;response_type=token&amp;redirect_uri=https://dida365.com/sign/qq&amp;state=">
+                            <a title="QQ" hidefocus="true" href="">
                                 <i class="icon_sign icon-qq"></i>
                             </a>
                         </li>
@@ -87,13 +87,31 @@
                 </div>
                 <div class="link signin sign-link">
           <span class="link">
-              已有账户？              <a href="/signin" class="signin-link">登录</a>
+              已有账户？              <a href="/login" class="signin-link">登录</a>
             </span>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+    export default{
+        props: [],
+        data(){
+
+        },
+        created(){
+
+        },
+        ready(){
+
+        },
+        components: {
+        }
+    }
+</script>
+
 <style>
     body {
         background: #fdfdfd none repeat scroll 0 0;
@@ -263,10 +281,3 @@
         }
     }
 </style>
-<script>
-    export default{
-        props: [],
-        components: {
-        }
-    }
-</script>
