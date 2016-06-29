@@ -21,14 +21,24 @@
     import TodoList from '../TodoList'
 
     import ListStore from '../../ListStore'
+    import store from '../../store/index'
+
     export default {
-        data: function () {
-            return {
-                listState: ListStore.state
+        vuex: {
+            getters: {
+                listState: function(state){
+                    return state
+                }
             }
         },
+        store:store,
+//        data: function () {
+//            return {
+//                listState: ListStore.state
+//            }
+//        },
         ready: function () {
-            ListStore.load();
+            //ListStore.load();
 
             new Vidage('#VidageVideo');
         },

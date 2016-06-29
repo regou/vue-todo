@@ -32,6 +32,8 @@
     import axios from 'axios';
     import {getWeatherIconClass,testForecast} from '../../constans';
 
+    import { addNew } from '../../store/actions'
+
     require('./css/weather-icons.min.css')
 
     function getForecast() {
@@ -46,6 +48,11 @@
     }
 
     export default{
+        vuex:{
+            actions:{
+                addNew
+            }
+        },
         data: function () {
             return {
                 date: '',
@@ -73,7 +80,7 @@
         },
         methods: {
             add: function (event) {
-                ListStore.newItem('Type a new task and hit enter', 'undone', 'normal');
+                this.addNew('Type a new task and hit enter', 'undone', 'normal');
             }
         }
     }

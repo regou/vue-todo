@@ -17,7 +17,8 @@
     "jquery": "^3.0.0",
     "moment": "^2.13.0",
     "vidage": "^0.1.2",
-    "vue": "^1.0.21"
+    "vue": "^1.0.21",
+    "vuex": "^0.8.2"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
