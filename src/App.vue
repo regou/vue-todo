@@ -1,13 +1,18 @@
 <template>
-  <div id="app" class="container">
-    <div class="todo-wrapper">
-      <todo-header></todo-header>
-      <div class="todo-content">
-        <todo-report></todo-report>
-        <todo-list :collection="listState.items"></todo-list>
+    <div>
+      <div id="app" class="container" v-if="">
+        <div class="todo-wrapper">
+          <todo-header></todo-header>
+          <div class="todo-content">
+            <todo-report></todo-report>
+            <todo-list :collection="listState.items"></todo-list>
+          </div>
+        </div>
       </div>
+        <div class="index-office intro">
+            <office-index></office-index>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -17,6 +22,8 @@ import Report from './components/Report'
 import TodoList from './components/TodoList'
 
 import ListStore from './ListStore'
+
+import officeIndex from './components/officeIndex';
 
 
 
@@ -47,7 +54,8 @@ export default {
     components: {
         'todo-header': Header,
         'todo-report': Report,
-        'todo-list': TodoList
+        'todo-list': TodoList,
+        'office-index': officeIndex
     }
 }
 

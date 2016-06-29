@@ -1,5 +1,5 @@
 <template>
-    <ul class="todo-list">
+<ul class="todo-list">
         <todo-item v-for="item in collection" :model="item"></todo-item>
     </ul>
 </template>
