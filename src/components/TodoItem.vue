@@ -33,7 +33,14 @@
 </style>
 <script>
     import ListStore from '../ListStore'
+    import { addNew,updateItem,delItem } from '../store/actions'
     export default{
+        vuex:{
+            actions:{
+                updateItem,
+                delItem
+            }
+        },
         props: ['model'],
         data: function() {
             return {
@@ -48,18 +55,19 @@
         methods: {
             save: function() {
                 if(this.tempText != '') {
-                    this.model.text = this.tempText;
                     this.model.isEditing = false;
 
-                    // local storage
-                    ListStore.push();
+                    this.updateItem({
+                        id:this.model.id,
+                        text:this.tempText
+                    })
                 }
             },
             markDone: function() {
-                this.model.status = "done"
-
-                // local storage
-                ListStore.push();
+                this.updateItem({
+                    id:this.model.id,
+                    status:"done"
+                })
             },
             edit: function() {
                 this.model.isEditing = true;
@@ -69,10 +77,11 @@
                 this.tempText = this.model.text;
             },
             delete: function() {
-                this.$dispatch('item-deleted', this.model);
-                this.$nextTick(function() {
-                    ListStore.push();
-                });
+                this.delItem(this.model);
+//                this.$dispatch('item-deleted', this.model);
+//                this.$nextTick(function() {
+//                    ListStore.push();
+//                });
             },
             showAction: function(event) {
                 event.stopPropagation();
@@ -99,10 +108,11 @@
                 }
             },
             saveLabel: function(type) {
-                this.model.label = type;
 
-                // local storage
-                ListStore.push();
+                this.updateItem({
+                    id:this.model.id,
+                    label:type
+                });
             }
         }
     }
