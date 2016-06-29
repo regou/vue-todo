@@ -27,7 +27,7 @@
 <script>
 
     import moment from 'moment';
-    import ListStore from '../../ListStore'
+
     import Bro from 'brototype';
     import axios from 'axios';
     import {getWeatherIconClass,testForecast} from '../../constans';

@@ -32,7 +32,7 @@
 
 </style>
 <script>
-    import ListStore from '../ListStore'
+
     import { addNew,updateItem,delItem } from '../store/actions'
     export default{
         vuex:{
@@ -78,10 +78,6 @@
             },
             delete: function() {
                 this.delItem(this.model);
-//                this.$dispatch('item-deleted', this.model);
-//                this.$nextTick(function() {
-//                    ListStore.push();
-//                });
             },
             showAction: function(event) {
                 event.stopPropagation();

@@ -20,7 +20,7 @@
     import Report from '../Report'
     import TodoList from '../TodoList'
 
-    import ListStore from '../../ListStore'
+
     import store from '../../store/index'
 
     export default {
@@ -32,13 +32,8 @@
             }
         },
         store:store,
-//        data: function () {
-//            return {
-//                listState: ListStore.state
-//            }
-//        },
+
         ready: function () {
-            //ListStore.load();
 
             new Vidage('#VidageVideo');
         },
