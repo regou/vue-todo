@@ -1,8 +1,13 @@
-import Vue from 'vue'
-import App from './App'
+import Vue from 'vue';
+import Index from './Index';
+import VueRouter from 'vue-router';
+import router from './router/router.js';
+
 window.$ = window.jQuery = require('jquery')
 /* eslint-disable no-new */
-new Vue({
-  el: 'body',
-  components: { App }
-})
+
+Vue.use(VueRouter);
+let vueRouter = new VueRouter();
+vueRouter.map(router);
+vueRouter.start(Index, '#master-wrapper');
+
