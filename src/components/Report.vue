@@ -6,13 +6,14 @@
 </template>
 
 <script>
-    import ListStore from '../ListStore'
     export default{
-      data: function() {
-        return {
-          listState: ListStore.state
-        }
-      },
+        vuex: {
+            getters: {
+                listState: function(state){
+                    return state
+                }
+            }
+        },
       computed: {
         taskDone: function() {
           var total = 0;
