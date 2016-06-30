@@ -43,7 +43,7 @@
                         <span class="icon lock">
                           <i icon="lock" class="icon-lock-gray icon_sign"></i>
                         </span>
-                            <input type="password" required="" placeholder="密码" name="password" class="required" id="set-password" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;" autocomplete="off">
+                            <input type="password" required="" placeholder="密码" name="password" minlength="6" class="required" id="set-password" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;" autocomplete="off">
                             <span class="input-bar"></span>
                             <div class="error">
                                 <p id="length_warn1" class="warn">
@@ -100,13 +100,16 @@
     export default{
         ready(){
             let self = this;
-            let newAccountArray = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : [];
+
             $(this.$els.loginFormRegist).on('submit',function (e) {
+                let newAccountArray = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : [];
                 let formArray = $(e.target).serializeArray();
                 let newAccount ={};
                 _.forEach(formArray,(item)=>{
                     newAccount[item.name] = item.value
                 })
+                newAccountArray.push(newAccount)
+//                console.log(newAccountArray)
                 localStorage.setItem('account',JSON.stringify(newAccountArray));
                 self.$router.go({name:'login'})
             })

@@ -1,3 +1,7 @@
+
+/**
+* Created by steven on 16/5/9.
+*/
 <template>
     <div class="intro-container container">
         <div class="logo">
