@@ -69,14 +69,13 @@
     .container {
         max-width: 100%;
         width: 71.5rem;
+        margin: 0 auto;
         display: block;
     }
     .header, .intro-container {
         transition: all 0.1s ease-in-out 0s;
     }
-    .container {
-        margin: 0 auto;
-    }
+
     p {
         font-size: 1rem;
         line-height: 2rem;
