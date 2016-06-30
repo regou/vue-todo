@@ -1,33 +1,26 @@
 <template>
-    <div class="sign signup-page">
-        <div class="card sign-in" id="signup-box">
+    <div class="sign signin-page">
+        <div class="card sign-in" id="login-box">
 
             <div class="card-section">
-                <div class="form form-horizontal" id="signup-form">
-                    <div class="row name">
-            <span class="icon name">
-              <i icon="name" class="icon_sign icon-name-gray"></i>
-            </span>
-                        <input type="text" autofocus="" autocomplete="on" placeholder="昵称（可选）" value="" name="name" class="required" id="nickname" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
-                        <span class="input-bar"></span>
-                    </div>
-
+                <form onsubmit="return false;" class="form form-horizontal" id="login-form" v-el:login-form>
                     <div class="row email">
-            <span class="icon email">
-              <i icon="email" class="icon-email-gray icon_sign"></i>
-            </span>
-                        <input type="email" required="" autocomplete="off" placeholder="邮箱" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,9}$" value="" name="email" class="required" id="set-username" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                        <span class="icon email">
+                          <i icon="email" class="icon_sign icon-email-gray"></i>
+                        </span>
+                        <input type="email" novalidate="false" autofocus="" autocomplete="off" placeholder="邮箱" value="" name="email" id="username" class="required" required style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
                         <span class="input-bar"></span>
-                        <div class="error email-warn">
-                            <p id="taken_warn" class="warn may-long">
+
+                        <div class="error">
+                            <p id="email_invalid_warn" class="warn">
                                 <span class="warn-icon"><i class="icon-warn icon_sign"></i></span>
-                                <span>该邮箱已经被注册，请<a href="/signin" class="switch-login">登录</a> 或 <a href="/sign/requestRestPassword">重置密码</a>。</span>
-                            </p>
-                            <p id="invalid_warn" class="warn">
+                                邮箱格式不正确              </p>
+                            <p class="warn" id="error_no_user_info">
                                 <span class="warn-icon"><i class="icon-warn icon_sign"></i></span>
-                                <span>邮箱格式不正确</span>
+                                <span>对不起，你输入的用户名不存在。</span>
+                                <a href="/signup" class="signup-link signup-entry" id="sign_up">注册</a>
                             </p>
-                            <p id="server_error" class="warn">
+                            <p class="warn" id="login_server_error">
                                 <span class="warn-icon"><i class="icon-warn icon_sign"></i></span>
                                 <span>服务器错误</span>
                             </p>
@@ -35,20 +28,24 @@
                                 <span class="warn-icon"><i class="icon-warn icon_sign"></i></span>
                                 <span>邮箱不能为空</span>
                             </p>
+
                         </div>
                     </div>
 
-
                     <div class="row password">
-                    <span class="icon lock">
-                      <i icon="lock" class="icon-lock-gray icon_sign"></i>
-                    </span>
-                        <input type="password" required="" placeholder="密码" name="password" class="required" id="set-password" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;" autocomplete="off">
+                        <span class="icon lock">
+                          <i icon="lock" class="icon-lock-gray icon_sign"></i>
+                        </span>
+                        <input type="password" placeholder="密码" name="password" id="password" class="required" required style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;" autocomplete="off">
                         <span class="input-bar"></span>
                         <div class="error">
-                            <p id="length_warn1" class="warn">
+                            <p id="login_length_warn" class="warn">
                                 <span class="warn-icon"><i class="icon-warn icon_sign"></i></span>
-                                <span>密码长度需为6~20个字符。</span>
+                                <span>密码的长度至少为6</span>
+                            </p>
+                            <p class="warn" id="error_username_password">
+                                <span class="warn-icon"><i class="icon-warn icon_sign"></i></span>
+                                <span>密码或用户名错误</span>
                             </p>
                             <p id="login_length_warn_empty" class="warn">
                                 <span class="warn-icon"><i class="icon-warn icon_sign"></i></span>
@@ -57,12 +54,18 @@
                         </div>
                     </div>
 
-                    <div class="row submit signup-btn btns">
-                        <button data-analy="signup" class="btn-initial button btn-med analy" id="submit-btn">创建免费账户</button>
-                        <!--<button class="btn-loading button btn-med disabled=">创建免费账户...</button>-->
+                    <div class="row submit btns">
+                        <button data-analy="signin" type="submit" class="btn-initial button btn-med analy" id="submit-btn">登录</button>
+                        <!--<button class="btn-loading button btn-med disabled=">登录...</button>-->
                     </div>
-                </div>
 
+                    <div class="row forgot-password">
+                        <span class="link switch-site"><a ></a></span>
+                        <span class="link">
+                          <a href="/sign/requestRestPassword" id="forget-password">忘记密码</a>
+                        </span>
+                    </div>
+                </form>
                 <div class="signin-sns">
                     <div class="middle-line sns-title">
                         使用第三方账户登录  </div>
@@ -74,7 +77,7 @@
                         </li>
                         <li class="wechat second">
 
-                            <a title="微信" hidefocus="true" href="">
+                            <a title="微信" hidefocus="true" href="" id="wechat_login_link">
                                 <i class="icon_sign icon-wechat"></i>
                             </a>
                         </li>
@@ -85,12 +88,13 @@
                         </li>
                     </ul>
                 </div>
-                <div class="link signin sign-link">
-          <span class="link">
-              已有账户？              <a href="/login" class="signin-link">登录</a>
-            </span>
+                <div class="link signup sign-link">
+                    <span class="link">
+                      <a v-link="{'name':'logout'}" class="signup-link">创建免费账户</a>
+                    </span>
                 </div>
             </div>
+
         </div>
     </div>
 </template>
@@ -98,14 +102,31 @@
 <script>
     export default{
         props: [],
-        data(){
-
-        },
         created(){
 
         },
         ready(){
+            var self = this;
+            $(this.$els.loginForm).on('submit',function (e) {
+//                console.log(e.target,222222)
+                let formArray = $(e.target).serializeArray();
+                let newAccount ={};
+                _.forEach(formArray,(item)=>{
+                    newAccount[item.name] = item.value
+                })
+                let getAccount = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : '';
+                if (getAccount){
+                    _.find(getAccount,newAccount)? self.$router.go({name:'contain'}): self.$router.go({name:'logout'});
+                }else {
+                    self.$router.go({name:'logout'})
+                }
 
+            })
+        },
+        methods:{
+            loginAction(){
+
+            }
         },
         components: {
         }

@@ -3,9 +3,10 @@
 
 
         <div class="index-office intro">
-            <office-index></office-index>
+            <!--<office-index></office-index>-->
+            <router-view></router-view>
         </div>
-        <!--<router-view></router-view>-->
+
     </div>
 </template>
 
