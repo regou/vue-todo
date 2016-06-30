@@ -31,7 +31,7 @@ body {
     background: #fff;
     border-radius: 6px;
     box-shadow: 0 0 40px rgba(0, 0, 0, .1);
-    width: 350px
+    /*width: 350px*/
 }
 
 .todo-header {
@@ -121,7 +121,9 @@ body {
 }
 
 .todo-list {
-    list-style: none
+    list-style: none;
+    height: 366px;
+    overflow: auto;
 }
 
 .todo-list .todo-item {

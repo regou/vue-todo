@@ -1,7 +1,7 @@
 <template>
     <div class="main-all">
-        <left v-if=""></left>
-        <middle></middle>
+        <left v-if="true"></left>
+        <middle v-if="true"></middle>
         <right v-if=""></right>
     </div>
 </template>
