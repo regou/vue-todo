@@ -156,11 +156,11 @@
             onVoiceResult:function (data) {
                 console.info('onVoiceResult',data);
                 if(data && data.confidence >0 ){
-                    this.pushNew(data.text || '', 'undone','normal');
+                    this.addNew(data.text || '', 'undone',false);
                 }
             },
             add: function (event) {
-                this.addNew('Type a new task and hit enter', 'undone',this.labelType);
+                this.addNew('Type a new task and hit enter', 'undone',true);
             }
         },
         components: {

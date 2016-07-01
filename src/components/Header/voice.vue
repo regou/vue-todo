@@ -75,6 +75,7 @@
             },
             recordHandler:function () {
                 if(!this.isRecording){
+                    this.recognition.stop();
                     this.recognition.start();
                     this.isRecording = true;
                 }else{

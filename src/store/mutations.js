@@ -2,7 +2,7 @@
  * Created by wx on 6/29/16.
  */
 
-
+import {filterRelations} from '../constans';
 export function localPush(state) {
     window.localStorage.setItem(`todo-list-${state.user_id}`, JSON.stringify(state.items));
 }
@@ -23,17 +23,19 @@ export function getAccount(state) {
     return true;
 }
 
+function getCurrentFilterLabel(state) {
+    var label = filterRelations.get(state.filterBy);
+    return label || 'normal'
+  
+}
+
 const mutations = {
     // TODO: 放置我们的状态变更函数
-    ADD_NEW:function (state, text, status,labels) {
+    ADD_NEW:function (state, text, status,isEditing) {
         let now = Date.now();
-        let label = labels ? labels : 'normal';
+        var label = getCurrentFilterLabel(state);
         // console.log()
-        state.items.unshift({id:now, createTime:now, text: text, status: status, label: label, isEditing: true });
-        localPush(state);
-    },
-    PUSH_NEW:function (state, text, status, label) {
-        state.items.unshift({id:Date.now(), text: text, status: status, label: label, isEditing: false });
+        state.items.unshift({id:now, createTime:now, text: text, status: status, label: label, isEditing: !!isEditing });
         localPush(state);
     },
     UPDATE_ITEM:function (state,updateData) {

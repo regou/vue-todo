@@ -110,32 +110,7 @@
 <script>
     import { addNew,updateItem,delItem ,filteDatas} from '../../store/actions'
     import store from '../../store/index'
-
-
-    function byAll(item) {
-        return true;
-    }
-    function byUrgent(item) {
-        return item.label == "urgent";
-    }
-    function byNormal(item) {
-        return item.label == "normal";
-    }
-    function byWhatever(item) {
-        return item.label == "other";
-    }
-
-    function byOneHour(item) {
-        let now = Date.now();
-//        console.log(now,now - 60*60*1000)
-        return item.createTime < now - 60*60*1000;
-    }
-    function byOneDay(item) {
-        let now = Date.now();
-//        console.log(now,now - 60*60*1000*24)
-        return item.createTime < now - 60*60*1000*24;
-    }
-
+    import {filterFuncs} from '../../constans';
 
     export default{
         vuex:{
@@ -144,22 +119,22 @@
             },
             getters: {
                 countAll: function (state) {
-                    return state.items.filter(byAll).length;
+                    return state.items.filter(filterFuncs.byAll).length;
                 },
                 countImportant: function (state) {
-                    return state.items.filter(byUrgent).length;
+                    return state.items.filter(filterFuncs.byUrgent).length;
                 },
                 countNormal: function (state) {
-                    return state.items.filter(byNormal).length;
+                    return state.items.filter(filterFuncs.byNormal).length;
                 },
                 countWhatever: function (state) {
-                    return state.items.filter(byWhatever).length;
+                    return state.items.filter(filterFuncs.byWhatever).length;
                 },
                 countOneHour: function (state) {
-                    return state.items.filter(byOneHour).length;
+                    return state.items.filter(filterFuncs.byOneHour).length;
                 },
                 countOneDay: function (state) {
-                    return state.items.filter(byOneDay).length;
+                    return state.items.filter(filterFuncs.byOneDay).length;
                 }
             }
         },
@@ -184,22 +159,22 @@
                 this.showTip = false
             },
             getAllThings(){
-                this.filteDatas(byAll)
+                this.filteDatas(filterFuncs.byAll)
             },
             getImportantThings(){
-                this.filteDatas(byUrgent)
+                this.filteDatas(filterFuncs.byUrgent)
             },
             getNormalThings(){
-                this.filteDatas(byNormal)
+                this.filteDatas(filterFuncs.byNormal)
             },
             getWhateverThings(){
-                this.filteDatas(byWhatever)
+                this.filteDatas(filterFuncs.byWhatever)
             },
             getOneHourThings(){
-                this.filteDatas(byOneHour)
+                this.filteDatas(filterFuncs.byOneHour)
             },
             getOneDayThings(){
-                this.filteDatas(byOneDay)
+                this.filteDatas(filterFuncs.byOneDay)
             }
         },
         transitions: {
