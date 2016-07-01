@@ -1,25 +1,71 @@
 <template>
-    <div class="add-voice" @click="record">
-        <i class="fa fa-plus"></i>
+    <div :class="['add-voice',{'voice-activate':isRecording}]" @click="recordHandler">
+        <i :class="isRecording?'vt-mute' : 'vt-mic' "></i>
     </div>
 </template>
 <style>
-    body{
-        background-color:#ff0000;
+    .add-voice::after{
+        content: ' ';
+        width: 6px;
+        height: 6px;
+        border-radius: 50% 50%;
+        background: rgba(255,255,255,0.5);
+        position: absolute;
+        top: calc(50% - 3px);
+        left: calc(50% - 3px);
+    }
+    .voice-activate.add-voice::after{
+        animation: 'rip' 1.3s ease-in-out infinite;
+    }
+    @keyframes rip {
+        0%{ transform: scale(1);opacity: 1;}
+        100%{transform: scale(12);opacity: 0.2;}
     }
 </style>
 <script>
-    import HeaderComponent from './components/header.vue'
-    import OtherComponent from './components/other.vue'
+
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+    var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+
     export default{
+        created:function () {
+            var recognition = this.recognition = new SpeechRecognition();
+            recognition.lang = 'zh-CN';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+            recognition.onresult = function(event) {
+                var res = event.results[0][0];
+                console.log('Confidence: ' , res.transcript, res.confidence);
+            }
+            recognition.onnomatch = function(event) {
+                console.log('nomatch: ' + event.results);
+            }
+            recognition.onerror = function(event) {
+                console.error(event);
+            }
+            recognition.onspeechend = ()=>this.stop();
+        },
         data(){
             return{
-                msg:'hello vue'
+                isRecording:false,
+                recognition:undefined
             }
         },
-        components:{
-            'other-component':OtherComponent,
-            HeaderComponent,
+        methods:{
+            stop:function () {
+                this.recognition.stop();
+                this.isRecording = false;
+            },
+            recordHandler:function () {
+                if(!this.isRecording){
+                    this.recognition.start();
+                    this.isRecording = true;
+                }else{
+                    this.stop();
+                }
+
+            }
         }
     }
 </script>
