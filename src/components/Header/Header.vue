@@ -10,7 +10,7 @@
         <div class="add-circle" @click="add">
             <i class="fa fa-plus"></i>
         </div>
-        <voice></voice>
+        <voice :lang="'zh-CN'" :on-result="onVoiceResult"></voice>
     </div>
 </template>
 
@@ -145,8 +145,14 @@
             this.year = mDate.year();
         },
         methods: {
+            onVoiceResult:function (data) {
+                if(data && data.confidence >0 ){
+                    this.addNew(data.text || '', 'undone', 'normal');
+                }
+                console.info(data);
+            },
             add: function (event) {
-                this.addNew('Type a new task and hit enter', 'undone', 'normal');
+                this.addNew('Type a new task and hit enterpp', 'undone', 'normal');
             }
         },
         components: {

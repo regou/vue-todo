@@ -29,7 +29,20 @@
     var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
     export default{
+        props: {
+            lang: {
+                type: String,
+                default: 'zh-CN'
+            },
+            onResult:{
+                type: Function,
+                default:function () {
+                    return {text:'',confidence:-1};
+                }
+            }
+        },
         created:function () {
+            var comp = this;
             var recognition = this.recognition = new SpeechRecognition();
             recognition.lang = 'zh-CN';
             recognition.interimResults = false;
@@ -37,6 +50,9 @@
             recognition.onresult = function(event) {
                 var res = event.results[0][0];
                 console.log('Confidence: ' , res.transcript, res.confidence);
+
+                comp.onResult({text:res.transcript,confidence:res.confidence})
+                comp.stop();
             }
             recognition.onnomatch = function(event) {
                 console.log('nomatch: ' + event.results);
