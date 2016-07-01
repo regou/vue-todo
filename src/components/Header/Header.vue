@@ -51,6 +51,12 @@
         vuex:{
             actions:{
                 addNew
+            },
+            getters: {
+                labelType: function (state) {
+//                    console.log(state.items.filter(state.filterBy)[0].label,4444)
+                    return state.items.filter(state.filterBy)[0].label;
+                }
             }
         },
         data: function () {
@@ -80,7 +86,8 @@
         },
         methods: {
             add: function (event) {
-                this.addNew('Type a new task and hit enter', 'undone', 'normal');
+                console.log(this.labelType,66666)
+                this.addNew('Type a new task and hit enter', 'undone',this.labelType);
             }
         }
     }

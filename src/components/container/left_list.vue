@@ -1,10 +1,10 @@
 <template>
     <div>
-    <div :class="['add-tip', 'center-containner',{'add-tip-small':showTip}]">
-        <span @click="showAll" v-show="!showTip">+</span>
-        <span @click="showAllSmall" v-show="showTip" class="small-icons">-</span>
+    <div :class="['add-tip', 'center-containner',{'add-tip-small':showTip}]" transition="icons">
+        <span @click="showAll" v-show="!showTip"><i>+</i></span>
+        <span @click="showAllSmall" v-show="showTip" class="small-icons"><i>-</i></span>
     </div>
-    <div class="left-list" v-show="showTip">
+    <div class="left-list" v-show="showTip" transition="fade">
         <div id="left-view" class="g-left">
 
             <!-- action bar -->
@@ -27,65 +27,79 @@
                     <div class="antiscroll-inner first-hide" style="height: 100%;">
 
                         <div class="collection list-group">
-                            <ul id="list-collection-a"><li tabindex="1" class="project smart-project ui-droppable active">
-                                <a href="javascript://" projectid="tasks" id="project_tasks" class="project-box project-link" @click='getAllThings'>
-
-
-                                    <span class="l-title ">所有</span>
-
-                                    <span class="count">2</span>
-                                </a>
-
-                            </li>
+                            <ul id="list-collection-a">
+                                 <li tabindex="1" class="project smart-project ui-droppable active" @click='getAllThings'>
+                                    <a href="javascript://" projectid="tasks" id="project_tasks" class="project-box project-link" >
+                                        <span class="l-title ">所有</span>
+                                        <span class="count">({{countAll}})</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
-
                         <div class="collection list-group">
-                            <ul id="list-collection-t"><li tabindex="1" class="project smart-project ui-droppable">
-                                <a href="javascript://" projectid="today" id="project_today" class="project-box project-link" @click='getImportantThings'>
+                            <ul id="list-collection-t">
+                                <li tabindex="1" class="project smart-project tkcalendar">
+                                    <a projectid="calendar" id="project_calendar" class="project-box project-link">
+                                        <span class="count"></span>
+                                    </a>
+                                </li>
+
+                                <li tabindex="1" class="project smart-project ui-droppable" @click='getImportantThings'>
+                                <a href="javascript://" projectid="today" id="project_today" class="project-box project-link" >
 
 
                                     <span class="l-title">重要</span>
 
-                                    <span class="count"></span>
+                                    <span class="count">({{countImportant}})</span>
                                 </a>
 
-                            </li><li tabindex="1" class="project smart-project ui-droppable">
-                                <a href="javascript://" projectid="week" id="project_week" class="project-box project-link" @click='getNormalThings'>
+                            </li><li tabindex="1" class="project smart-project ui-droppable" @click='getNormalThings'>
+                                <a href="javascript://" projectid="week" id="project_week" class="project-box project-link">
 
 
                                     <span class="l-title">一般</span>
 
-                                    <span class="count"></span>
+                                    <span class="count">({{countNormal}})</span>
                                 </a>
 
                             </li>
-                                <li tabindex="1" class="project smart-project tkcalendar">
-                                    <a projectid="calendar" id="project_calendar" class="project-box project-link">
-                                <span class="count"></span>
-                            </a>
-                            </li>
-                                <li tabindex="1" class="project smart-project assigned-me">
-                                <a projectid="assignedme" id="project_assignedme" class="project-box project-link" @click='getWhateverThings'>
+
+                            <li tabindex="1" class="project smart-project assigned-me" @click='getWhateverThings'>
+                                <a projectid="assignedme" id="project_assignedme" class="project-box project-link" >
 
 
                                     <span class="l-title ">随便</span>
 
-                                    <span class="count"></span>
+                                    <span class="count">({{countWhatever}})</span>
                                 </a>
 
-                            </li></ul>
+                            </li>
+                            <li tabindex="1" class="project smart-project tkcalendar">
+                                <a projectid="calendar" id="project_calendar" class="project-box project-link">
+                                    <span class="count"></span>
+                                </a>
+                            </li>
+                            <li @click='getOneHourThings'>
+                                <a href="javascript://" >
+
+                                    <span class="l-title ">最近一小时</span>
+
+                                    <span class="count">({{countOneHour}})</span>
+                                </a>
+                            </li>
+                            <li @click='getOneDayThings'>
+                                <a href="javascript://" >
+
+                                    <span class="l-title ">最近一天</span>
+
+                                    <span class="count">({{countOneDay}})</span>
+                                </a>
+                            </li>
+                            </ul>
                         </div>
 
                     </div>
                     <div class="antiscroll-scrollbar antiscroll-scrollbar-vertical" style="height: 442px; top: 0px;"></div></div>
-            <div id="project-list-view">
-                <ul>
-                    <li><a href="#">所有</a></li>
-                    <li><a href="#">最近一小时</a></li>
-                    <li><a href="#">最近一天</a></li>
-                </ul>
-            </div>
             <!--list view end-->
 
         </div>
@@ -111,11 +125,42 @@
         return item.label == "other";
     }
 
+    function byOneHour(item) {
+        let now = Date.now();
+//        console.log(now,now - 60*60*1000)
+        return item.createTime < now - 60*60*1000;
+    }
+    function byOneDay(item) {
+        let now = Date.now();
+//        console.log(now,now - 60*60*1000*24)
+        return item.createTime < now - 60*60*1000*24;
+    }
+
 
     export default{
         vuex:{
             actions:{
                 filteDatas
+            },
+            getters: {
+                countAll: function (state) {
+                    return state.items.filter(byAll).length;
+                },
+                countImportant: function (state) {
+                    return state.items.filter(byUrgent).length;
+                },
+                countNormal: function (state) {
+                    return state.items.filter(byNormal).length;
+                },
+                countWhatever: function (state) {
+                    return state.items.filter(byWhatever).length;
+                },
+                countOneHour: function (state) {
+                    return state.items.filter(byOneHour).length;
+                },
+                countOneDay: function (state) {
+                    return state.items.filter(byOneDay).length;
+                }
             }
         },
         store,
@@ -134,7 +179,6 @@
         methods:{
             showAll(){
                 this.showTip = true
-
             },
             showAllSmall(){
                 this.showTip = false
@@ -150,9 +194,55 @@
             },
             getWhateverThings(){
                 this.filteDatas(byWhatever)
+            },
+            getOneHourThings(){
+                this.filteDatas(byOneHour)
+            },
+            getOneDayThings(){
+                this.filteDatas(byOneDay)
             }
         },
-        components: {
+        transitions: {
+            'fade': {
+                css: false,
+                enter: function (el, done) {
+                    // 元素已被插入 DOM
+                    // 在动画结束后调用 done
+                    $(el)
+                        .css('opacity', 1)
+                        .animate({width: 250}, 500, done)
+                },
+                enterCancelled: function (el) {
+                    $(el).stop()
+                },
+                leave: function (el, done) {
+                    // 与 enter 相同
+                    $(el).animate({width: 0}, 500, done)
+                },
+                leaveCancelled: function (el) {
+                    $(el).stop()
+                }
+            },
+            icons: {
+                css: false,
+                enter: function (el, done) {
+                    // 元素已被插入 DOM
+                    // 在动画结束后调用 done
+                    $(el)
+                        .css('opacity', 1)
+                        .animate({left: 200}, 500, done)
+                },
+                enterCancelled: function (el) {
+                    $(el).stop()
+                },
+                leave: function (el, done) {
+                    // 与 enter 相同
+                    $(el).animate({left: 0}, 500, done)
+                },
+                leaveCancelled: function (el) {
+                    $(el).stop()
+                }
+            }
         }
     }
 </script>
@@ -178,15 +268,15 @@
     }
     .add-tip-small{
         background-color: transparent;
-        left: 200px;
+        left: 250px;
     }
     .add-tip span{
-        font-size: 40px;
+        font-size: 20px;
         display: inline-block;
         vertical-align: top;
         border: 1px solid #fff;
-        border-radius: 40px;
-        width: 40px;
+        border-radius: 20px;
+        width: 20px;
         cursor: pointer;
     }
     .add-tip span.small-icons{
@@ -195,12 +285,19 @@
     #project-list-view ul li{
         padding: 8px 1em;
     }
+    #project-list-view ul li:hover{
+        cursor: pointer;
+        background: rgba(255,255,255,.3);
+    }
+    #project-list-view ul li.tkcalendar{
+        padding: 0;
+    }
 
     .left-list{
         color: white;
         display: inline-block;
-        width: 200px;
-        height: 100vh;
+        width: 250px;
+        height: 100%;
         position: absolute;
         top: 0;
         left: 0;
@@ -208,6 +305,11 @@
     }
     .left-list a{
         color: white;
+    }
+    .count{
+        display: inline-block;
+        padding-left: 0px;
+        opacity: .4;
     }
 
 </style>

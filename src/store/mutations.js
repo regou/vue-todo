@@ -25,9 +25,11 @@ export function getAccount(state) {
 
 const mutations = {
     // TODO: 放置我们的状态变更函数
-    ADD_NEW:function (state, text, status, label) {
-        console.log(state, text, status, label)
-        state.items.unshift({id:Date.now(), text: text, status: status, label: label, isEditing: true });
+    ADD_NEW:function (state, text, status,labels) {
+        let now = Date.now();
+        let label = labels ? labels : 'normal';
+        // console.log()
+        state.items.unshift({id:now, createTime:now, text: text, status: status, label: label, isEditing: true });
         localPush(state);
     },
     UPDATE_ITEM:function (state,updateData) {
@@ -41,9 +43,10 @@ const mutations = {
         console.log(state,itemRef,_.filter(state.items,{label:'normal'}),5555)
         localPush(state);
     },
-    FILTER_DATAS:function (state,func) {
+    FILTER_DATAS:function (state,func,status) {
         if (typeof func === 'function'){
             state.filterBy = func;
+            console.log(state,state.filterBy,33333)
         }else{
             throw  new TypeError('Require type function')
         }

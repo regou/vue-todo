@@ -10,7 +10,7 @@ Vue.use(Vuex);
 
 
 const state = {
-    filterBy:function (item) {
+    filterBy:function (item,status) {
         return true
     },
     user_id:'anonymous',

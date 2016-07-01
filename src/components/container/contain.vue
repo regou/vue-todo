@@ -7,9 +7,10 @@
 </template>
 
 <script>
-    import left from './left_list.vue'
-    import middle from './middle_content.vue'
-    import right from './right_info.vue'
+    import left from './left_list.vue';
+    import middle from './middle_content.vue';
+    import right from './right_info.vue';
+    import store from '../../store/index';
     export default{
         props: [],
         components: {
