@@ -1,44 +1,20 @@
 <template>
-    <div class="add-tip" v-el:add-tip>
+    <div :class="['add-tip', 'center-containner',{'add-tip-small':showTip}]">
         <span @click="showAll" v-show="!showTip">+</span>
         <span @click="showAllSmall" v-show="showTip" class="small-icons">-</span>
     </div>
-    <div class="left-list" id="left-list" v-show="showTip">
+    <div class="left-list" v-show="showTip">
         <div id="left-view" class="g-left">
 
             <!-- action bar -->
-            <div class="tool-bar">
-                <div class="indicator slow-transition" style="display: block;"></div>
+            <div class="tool-bar clearfix">
 
-                <div class="t-user user dropdown" id="preferences-menu">
-                    <a data-toggle="dropdown" class="dropdown-toggle boult">
+
+                <div class="t-user user" >
+                    <a class="boult">
                         <img class="avatar" src="/static/images/avatar-new.png">
-
                     </a>
-                    <span data-toggle="dropdown" class="username t-name">qjliang_1213</span>
-
-                    <ul class="dropdown-menu pull-left">
-                        <li><a id="refresh">同步</a></li>
-                        <li><a id="settings" href="">设置</a></li>
-                        <li><a id="homepage" href="" target="">首页</a></li>
-                        <li><a id="help" href="" target="">帮助</a></li>
-                        <li><a id="logout">退出登录</a></li>
-                    </ul>
-
-                </div>
-
-                <a id="search" class="t-search" href="#s/">
-                    <svg class="icon-search i-1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-search"></use></svg>
-                </a>
-
-                <div id="notification-menu" class="dropdown notification t-notify">
-                    <a class="dropdown-toggle power-tip boult" data-toggle="dropdown" title="消息">
-                        <svg class="icon-notification i-1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-notification"></use></svg>
-                        <span class="badge n-count"></span>
-                    </a>
-                    <div class="dropdown-menu pull-left">
-                        <div id="notification_panel" class="notify-panel"></div>
-                    </div>
+                    <span class="username t-name">qjliang_1213</span>
                 </div>
 
             </div>
@@ -102,16 +78,15 @@
 
                     </div>
                     <div class="antiscroll-scrollbar antiscroll-scrollbar-vertical" style="height: 442px; top: 0px;"></div></div>
+            <div id="project-list-view">
+                <ul>
+                    <li><a href="#">所有</a></li>
+                    <li><a href="#">最近一小时</a></li>
+                    <li><a href="#">最近一天</a></li>
+                </ul>
             </div>
             <!--list view end-->
 
-            <!--plugin calendar view start-->
-            <div id="left-bottom-view">
-                <div id="datepicker" class="min-cal"></div>
-
-
-            </div>
-            <!--plugin calendar view end-->
         </div>
     </div>
 </template>
@@ -140,18 +115,17 @@
         methods:{
             showAll(){
                 this.showTip = true
-                $(this.$els.addTip).addClass('add-tip-small')
+
             },
             showAllSmall(){
                 this.showTip = false
-                $(this.$els.addTip).removeClass('add-tip-small')
+//                $(this.$els.addTip).removeClass('add-tip-small')
             },
             getAllThings(){
 
             },
             getImportantThings(){
                 this.filteDatas('normal')
-
             }
         },
         components: {
@@ -159,22 +133,28 @@
     }
 </script>
 <style>
+    .t-user{padding: 1em;}
+    .t-user > *{display: inline-block;vertical-align: middle;}
+    .t-name{line-height: 3em;}
+    .avatar{
+        max-width: 3em;
+    }
     .add-tip{
         position: absolute;
         top: 0;
         left: 0;
-        padding-top: 30%;
-        background-color: rgba(0,0,0,.2);
         height: 100%;
         color: #fff;
         width: 50px;
         text-align: center;
         z-index: 2;
     }
+    .left-list{
+        background-color: rgba(0,0,0,.2);
+    }
     .add-tip-small{
         background-color: transparent;
-        padding-left: 200px;
-        padding-top: 50%;
+        left: 200px;
     }
     .add-tip span{
         font-size: 40px;
@@ -188,17 +168,22 @@
     .add-tip span.small-icons{
 
     }
-    #left-list{
-
-        /*display: -webkit-box;*/
-        /*display: -ms-flexbox;*/
-        /*display: block;*/
-        /*-webkit-box-align: left;*/
-        /*-ms-flex-align: left;*/
-        /*align-items: left;*/
-        /*-webkit-box-pack: left;*/
-        /*-ms-flex-pack: left;*/
-        /*justify-content: none;*/
-        /*height: 100%;*/
+    #project-list-view ul li{
+        padding: 8px 1em;
     }
+
+    .left-list{
+        color: white;
+        display: inline-block;
+        width: 200px;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+    .left-list a{
+        color: white;
+    }
+
 </style>

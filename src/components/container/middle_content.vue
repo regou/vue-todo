@@ -1,5 +1,5 @@
 <template>
-    <div class="middle-content">
+    <div class="middle-content full center-containner">
         <div id="app" class="container" v-if="true">
             <div class="todo-wrapper">
                 <todo-header></todo-header>

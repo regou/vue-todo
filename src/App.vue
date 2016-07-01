@@ -29,17 +29,8 @@ export default {
 </script>
 
 <style>
-html {
-  height: 100%;
-}
 
-body{
-    height:100%;
-}
 #master-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 100%;
 }
 

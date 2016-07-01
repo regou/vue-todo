@@ -31,8 +31,10 @@
     </li>
 </template>
 <style>
-    .g-left{
-        background-color: rgba(0,0,0,.2);
+    .g-left::after{
+        content: ' ';
+        background: rgba(255,255,255,0.3);
+        filter:blur(10px);
     }
 </style>
 <script>
