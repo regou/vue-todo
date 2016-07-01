@@ -49,57 +49,6 @@ body {
     /*width: 350px*/
 }
 
-.todo-header {
-    border-radius: 6px 6px 0 0;
-    background: url('/static/video/wow.jpg') no-repeat;
-    background-size: cover;
-    padding: 55px 20px;
-    position: relative
-}
-
-.todo-header .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, .2);
-    border-radius: 6px 6px 0 0
-}
-
-.todo-header time {
-    color: #fff;
-    display: block;
-    position: relative
-}
-
-.todo-header time .day {
-    font-size: 4em;
-    float: left;
-    margin-right: 10px
-}
-
-.todo-header time .dayofweek {
-    display: block;
-    margin-top: 13px;
-    font-size: 1.4em;
-    font-weight: 700
-}
-
-.todo-header .add-circle {
-    position: absolute;
-    background: #ff3c41;
-    color: #fff;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    right: 20px;
-    bottom: -20px;
-    box-shadow: 0 0 13px #ff3c41;
-    cursor: pointer
-}
 
 .todo-form {
     margin: 15px 0;
