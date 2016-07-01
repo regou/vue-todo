@@ -5,7 +5,7 @@
                 <todo-header></todo-header>
                 <div class="todo-content">
                     <todo-report></todo-report>
-                    <todo-list :collection="listState.items"></todo-list>
+                    <todo-list :collection="list"></todo-list>
                 </div>
             </div>
         </div>
@@ -26,8 +26,11 @@
     export default {
         vuex: {
             getters: {
-                listState: function(state){
+                mainstate: function(state){
                     return state
+                },
+                list: function (state) {
+                    return state.items.filter(state.filterBy);
                 }
             }
         },

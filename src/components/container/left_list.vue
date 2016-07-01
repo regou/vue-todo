@@ -1,4 +1,5 @@
 <template>
+    <div>
     <div :class="['add-tip', 'center-containner',{'add-tip-small':showTip}]">
         <span @click="showAll" v-show="!showTip">+</span>
         <span @click="showAllSmall" v-show="showTip" class="small-icons">-</span>
@@ -89,10 +90,16 @@
 
         </div>
     </div>
+    </div>
 </template>
 
 <script>
     import { addNew,updateItem,delItem ,filteDatas} from '../../store/actions'
+    import store from '../../store/index'
+
+    function byUrgent(item) {
+        return item.label == "urgent";
+    }
 
     export default{
         vuex:{
@@ -100,6 +107,7 @@
                 filteDatas
             }
         },
+        store,
         data(){
             return {
                 showTip: false
@@ -125,7 +133,7 @@
 
             },
             getImportantThings(){
-                this.filteDatas('normal')
+                this.filteDatas(byUrgent)
             }
         },
         components: {

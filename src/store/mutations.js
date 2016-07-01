@@ -41,9 +41,13 @@ const mutations = {
         console.log(state,itemRef,_.filter(state.items,{label:'normal'}),5555)
         localPush(state);
     },
-    FILTER_DATAS:function (state,label) {
-        console.log(state,label,_.filter(state.items,{label:label}),444444)
-        _.filter(state,{label:label})
+    FILTER_DATAS:function (state,func) {
+        if (typeof func === 'function'){
+            state.filterBy = func;
+        }else{
+            throw  new TypeError('Require type function')
+        }
+
     }
 }
 

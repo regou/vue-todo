@@ -11,7 +11,7 @@ export const filteDatas = makeAction('FILTER_DATAS');
 
 
 function makeAction (type) {
-    console.log(type,33333)
+    console.log(type)
     return ({ dispatch }, ...args) => dispatch(type, ...args)
 }
 

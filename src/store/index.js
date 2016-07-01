@@ -10,6 +10,9 @@ Vue.use(Vuex);
 
 
 const state = {
+    filterBy:function (item) {
+        return true
+    },
     user_id:'anonymous',
     items: [],
     allAccount: []
