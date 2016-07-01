@@ -51,7 +51,7 @@
                                 </a>
 
                             </li><li tabindex="1" class="project smart-project ui-droppable">
-                                <a href="javascript://" projectid="week" id="project_week" class="project-box project-link">
+                                <a href="javascript://" projectid="week" id="project_week" class="project-box project-link" @click='getNormalThings'>
 
 
                                     <span class="l-title">一般</span>
@@ -66,7 +66,7 @@
                             </a>
                             </li>
                                 <li tabindex="1" class="project smart-project assigned-me">
-                                <a projectid="assignedme" id="project_assignedme" class="project-box project-link">
+                                <a projectid="assignedme" id="project_assignedme" class="project-box project-link" @click='getWhateverThings'>
 
 
                                     <span class="l-title ">随便</span>
@@ -97,9 +97,20 @@
     import { addNew,updateItem,delItem ,filteDatas} from '../../store/actions'
     import store from '../../store/index'
 
+
+    function byAll(item) {
+        return true;
+    }
     function byUrgent(item) {
         return item.label == "urgent";
     }
+    function byNormal(item) {
+        return item.label == "normal";
+    }
+    function byWhatever(item) {
+        return item.label == "other";
+    }
+
 
     export default{
         vuex:{
@@ -127,13 +138,18 @@
             },
             showAllSmall(){
                 this.showTip = false
-//                $(this.$els.addTip).removeClass('add-tip-small')
             },
             getAllThings(){
-
+                this.filteDatas(byAll)
             },
             getImportantThings(){
                 this.filteDatas(byUrgent)
+            },
+            getNormalThings(){
+                this.filteDatas(byNormal)
+            },
+            getWhateverThings(){
+                this.filteDatas(byWhatever)
             }
         },
         components: {
