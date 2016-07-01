@@ -1,10 +1,10 @@
 <template>
-    <div>
-    <div :class="['add-tip', 'center-containner',{'add-tip-small':showTip}]" transition="icons">
+    <aside :class="['v-aside',{'show-aside':showTip}]">
+    <div :class="['add-tip', 'center-containner',{'add-tip-small':showTip}]">
         <span @click="showAll" v-show="!showTip"><i>+</i></span>
         <span @click="showAllSmall" v-show="showTip" class="small-icons"><i>-</i></span>
     </div>
-    <div class="left-list" v-show="showTip" transition="fade">
+    <div class="left-list">
         <div id="left-view" class="g-left">
 
             <!-- action bar -->
@@ -29,23 +29,20 @@
                         <div class="collection list-group">
                             <ul id="list-collection-a">
                                  <li tabindex="1" class="project smart-project ui-droppable active" @click='getAllThings'>
-                                    <a href="javascript://" projectid="tasks" id="project_tasks" class="project-box project-link" >
+                                    <a href="javascript://" class="project-box project-link" >
                                         <span class="l-title ">所有</span>
                                         <span class="count">({{countAll}})</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
+
                         <div class="collection list-group">
                             <ul id="list-collection-t">
-                                <li tabindex="1" class="project smart-project tkcalendar">
-                                    <a projectid="calendar" id="project_calendar" class="project-box project-link">
-                                        <span class="count"></span>
-                                    </a>
-                                </li>
+
 
                                 <li tabindex="1" class="project smart-project ui-droppable" @click='getImportantThings'>
-                                <a href="javascript://" projectid="today" id="project_today" class="project-box project-link" >
+                                <a class="project-box project-link" >
 
 
                                     <span class="l-title">重要</span>
@@ -54,7 +51,7 @@
                                 </a>
 
                             </li><li tabindex="1" class="project smart-project ui-droppable" @click='getNormalThings'>
-                                <a href="javascript://" projectid="week" id="project_week" class="project-box project-link">
+                                <a href="javascript://" class="project-box project-link">
 
 
                                     <span class="l-title">一般</span>
@@ -65,7 +62,7 @@
                             </li>
 
                             <li tabindex="1" class="project smart-project assigned-me" @click='getWhateverThings'>
-                                <a projectid="assignedme" id="project_assignedme" class="project-box project-link" >
+                                <a class="project-box project-link" >
 
 
                                     <span class="l-title ">随便</span>
@@ -74,37 +71,41 @@
                                 </a>
 
                             </li>
-                            <li tabindex="1" class="project smart-project tkcalendar">
-                                <a projectid="calendar" id="project_calendar" class="project-box project-link">
-                                    <span class="count"></span>
-                                </a>
-                            </li>
-                            <li @click='getOneHourThings'>
-                                <a href="javascript://" >
 
-                                    <span class="l-title ">最近一小时</span>
+                            </ul>
+                        </div>
 
-                                    <span class="count">({{countOneHour}})</span>
-                                </a>
-                            </li>
-                            <li @click='getOneDayThings'>
-                                <a href="javascript://" >
+                        <div class="collection list-group">
+                            <ul>
+                                <li @click='getOneHourThings'>
+                                    <a href="javascript://" >
 
-                                    <span class="l-title ">最近一天</span>
+                                        <span class="l-title ">最近一小时</span>
 
-                                    <span class="count">({{countOneDay}})</span>
-                                </a>
-                            </li>
+                                        <span class="count">({{countOneHour}})</span>
+                                    </a>
+                                </li>
+                                <li @click='getOneDayThings'>
+                                    <a href="javascript://" >
+
+                                        <span class="l-title ">最近一天</span>
+
+                                        <span class="count">({{countOneDay}})</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
 
                     </div>
-                    <div class="antiscroll-scrollbar antiscroll-scrollbar-vertical" style="height: 442px; top: 0px;"></div></div>
-            <!--list view end-->
+
+                </div>
+
+            </div>
 
         </div>
+
     </div>
-    </div>
+    </aside>
 </template>
 
 <script>
@@ -178,26 +179,6 @@
             }
         },
         transitions: {
-            'fade': {
-                css: false,
-                enter: function (el, done) {
-                    // 元素已被插入 DOM
-                    // 在动画结束后调用 done
-                    $(el)
-                        .css('opacity', 1)
-                        .animate({width: 250}, 500, done)
-                },
-                enterCancelled: function (el) {
-                    $(el).stop()
-                },
-                leave: function (el, done) {
-                    // 与 enter 相同
-                    $(el).animate({width: 0}, 500, done)
-                },
-                leaveCancelled: function (el) {
-                    $(el).stop()
-                }
-            },
             icons: {
                 css: false,
                 enter: function (el, done) {
@@ -222,6 +203,22 @@
     }
 </script>
 <style>
+    .v-aside{
+        height: 100vh;width: 300px;
+        transform: translateX(-250px);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        will-change: transform;
+        transition-duration: 0.5s;
+        transition-timing-function: ease-in-out;
+    }
+    .v-aside.show-aside{
+        transform: translateX(0%);
+    }
+
+
     .t-user{padding: 1em;}
     .t-user > *{display: inline-block;vertical-align: middle;}
     .t-name{line-height: 3em;}
@@ -231,7 +228,7 @@
     .add-tip{
         position: absolute;
         top: 0;
-        left: 0;
+        right: 0;
         height: 100%;
         color: #fff;
         width: 50px;
@@ -279,12 +276,16 @@
         z-index: 1;
     }
     .left-list a{
+        text-decoration: none !important;
         color: white;
     }
     .count{
         display: inline-block;
         padding-left: 0px;
         opacity: .4;
+    }
+    .list-group{
+        margin-bottom: 1em;
     }
 
 </style>
