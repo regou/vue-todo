@@ -24,8 +24,10 @@
                 <li @click="markDone" v-if="!isDone">Mark done</li>
                 <li @click="edit" v-if="!isDone">Edit</li>
                 <li @click="delete">Delete</li>
+                <li @click="remark">查看/备注</li>
             </ul>
         </div>
+
     </li>
 </template>
 <style>
@@ -43,7 +45,7 @@
                 delItem
             }
         },
-        props: ['model'],
+        props: ['model','remark'],
         data: function() {
             return {
                 tempText: '',

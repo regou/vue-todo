@@ -36,9 +36,11 @@
         ready: function () {
 
             new Vidage('#VidageVideo');
+
         },
         created: function () {
             window.addEventListener('click', this.hideAction);
+            console.log(this.listState,2222)
         },
         beforeDestory: function () {
             window.removeEventListener('click', this.hideAction);

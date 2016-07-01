@@ -8,9 +8,11 @@ import {localLoad,localPush} from './mutations';
 import mutations from './mutations';
 Vue.use(Vuex);
 
+
 const state = {
     user_id:'anonymous',
-    items: []
+    items: [],
+    allAccount: []
 };
 
 localLoad(state);

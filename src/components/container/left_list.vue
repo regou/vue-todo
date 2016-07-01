@@ -51,146 +51,54 @@
 
                         <div class="collection list-group">
                             <ul id="list-collection-a"><li tabindex="1" class="project smart-project ui-droppable active">
-                                <a href="#q/all/tasks" projectid="tasks" id="project_tasks" class="project-box project-link">
+                                <a href="javascript://" projectid="tasks" id="project_tasks" class="project-box project-link" @click='getAllThings'>
 
 
-                                    <svg class="icon-all-list i-1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-all-list"></use></svg><span class="l-title ">所有</span>
+                                    <span class="l-title ">所有</span>
 
                                     <span class="count">2</span>
                                 </a>
 
-                            </li></ul>
+                            </li>
+                            </ul>
                         </div>
 
                         <div class="collection list-group">
                             <ul id="list-collection-t"><li tabindex="1" class="project smart-project ui-droppable">
-                                <a href="#q/all/today" projectid="today" id="project_today" class="project-box project-link">
+                                <a href="javascript://" projectid="today" id="project_today" class="project-box project-link" @click='getImportantThings'>
 
 
-                                    <svg class="icon-today-list i-1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-today-list"></use></svg><div class="outer-date"><span class="inner-date">28</span></div><span class="l-title ">今天</span>
-
-                                    <span class="count"></span>
-                                </a>
-
-                            </li><li tabindex="1" class="project smart-project ui-droppable">
-                                <a href="#q/all/week" projectid="week" id="project_week" class="project-box project-link">
-
-
-                                    <svg class="icon-today-list i-1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-today-list"></use></svg><div class="outer-date"><span class="inner-date">T</span></div><span class="l-title ">最近7天</span>
-
-                                    <span class="count"></span>
-                                </a>
-
-                            </li><li tabindex="1" class="project smart-project tkcalendar hide"><a href="#c/all/calendar" projectid="calendar" id="project_calendar" class="project-box project-link">
-                                <svg class="icon-calendar-list i-1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-calendar-list"></use></svg><span class="l-title ">日历</span><span class="count"></span>
-                            </a>
-                            </li><li tabindex="1" class="project smart-project assigned-me hide">
-                                <a href="#q/all/assignedme" projectid="assignedme" id="project_assignedme" class="project-box project-link">
-
-
-                                    <svg class="icon-assigned-to-me-list i-1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-assigned-to-me-list"></use></svg><span class="l-title ">分配给我</span>
-
-                                    <span class="count"></span>
-                                </a>
-
-                            </li></ul>
-                        </div>
-
-                        <div class="collection list-group">
-                            <ul id="list-collection-i"><li tabindex="1" class="project smart-project ui-droppable">
-                                <a href="#p/inbox/tasks" projectid="inbox1011112228" id="project_inbox1011112228" class=" project-box project-link ">
-
-
-                                    <svg class="icon-inbox-list i-1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-inbox-list"></use></svg><span class="l-title ">收集箱</span>
-
-        <span class="dropdown p-caret">
-          <span class="dropdown-toggle" data-toggle="dropdown" data-dropdown="#list-dropdown-id_inbox1011112228">
-          <svg class="icon-more i-1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-more"></use></svg>
-          </span>
-        </span>
-
-                                    <span class="count">2</span>
-                                </a>
-
-                            </li></ul>
-                        </div>
-
-                        <div class="l-tabs l-l-t l-c disabled-tag">
-                            <a class="l-tab t-active">
-                                <span class="text-sml">清单</span>
-                            </a>
-                            <a class="l-tab">
-                                <span class="text-sml">标签</span>
-                            </a>
-                        </div>
-
-                        <!--list start-->
-                        <div class="project-list list-group l-tab-pane-0 t-active">
-                            <ul id="project-ul" class="project-ul ui-sortable"></ul>
-                        </div>
-                        <!--list end-->
-
-                        <!-- close-project start -->
-                        <div class="list-group list-closed l-c l-tab-pane-0 t-active hide"><a id="l-closed-toggle">
-
-                            <svg class="icon-closed-list i-1 normal-icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-closed-list"></use></svg><span class="text-sml l-close-title" id="show-closed">已关闭的清单</span>
-                            <span class="count badge">0</span>
-                        </a>
-                            <ul id="close-project-ul" class="l-closed-ul inner-ul" style="display: none;">
-                            </ul>
-                        </div>
-                        <!-- close-project end -->
-
-                        <!-- new list -->
-                        <div class="l-new l-tab-pane-0 t-active">
-                            <a id="project-new-button" class="pointer">
-
-                                <svg class="icon-add-new-list i-1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-add-new-list"></use></svg><span class="l-title">添加清单</span>
-                            </a></div>
-
-                        <!--tagList start -->
-                        <div class="tag-list list-group l-tab-pane-1 hide">
-                            <div class="empty-tag">
-                                <svg class="icon-empty-tag i-xl"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-empty-tag"></use></svg>
-                                <span>还没有标签<br>在任务中输入#号键可添加标签</span>
-                            </div>
-                        </div>
-                        <!--tagList end -->
-
-                        <div class="l-divider"></div>
-
-                        <!--calendarList start -->
-                        <div class="calendar-list list-group">
-                            <ul id="calendar-ul">
-                            </ul>
-                            <div class="l-divider hide"></div>
-                        </div>
-
-                        <!--calendarList end -->
-
-                        <!--another collection start-->
-                        <div class="collection list-group">
-                            <ul id="list-collection-c" class="list"><li tabindex="1" class="project smart-project ui-droppable">
-                                <a href="#q/all/completed" projectid="completed" id="project_completed" class="project-box project-link">
-
-
-                                    <svg class="icon-completed-list i-1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-completed-list"></use></svg><span class="l-title ">已完成</span>
+                                    <span class="l-title">重要</span>
 
                                     <span class="count"></span>
                                 </a>
 
                             </li><li tabindex="1" class="project smart-project ui-droppable">
-                                <a href="#q/all/trash" projectid="trash" id="project_trash" class="project-box project-link">
+                                <a href="javascript://" projectid="week" id="project_week" class="project-box project-link">
 
 
-                                    <svg class="icon-delete-list i-1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-delete-list"></use></svg><span class="l-title ">垃圾桶</span>
+                                    <span class="l-title">一般</span>
+
+                                    <span class="count"></span>
+                                </a>
+
+                            </li>
+                                <li tabindex="1" class="project smart-project tkcalendar">
+                                    <a projectid="calendar" id="project_calendar" class="project-box project-link">
+                                <span class="count"></span>
+                            </a>
+                            </li>
+                                <li tabindex="1" class="project smart-project assigned-me">
+                                <a projectid="assignedme" id="project_assignedme" class="project-box project-link">
+
+
+                                    <span class="l-title ">随便</span>
 
                                     <span class="count"></span>
                                 </a>
 
                             </li></ul>
                         </div>
-                        <!--another collection end-->
 
                     </div>
                     <div class="antiscroll-scrollbar antiscroll-scrollbar-vertical" style="height: 442px; top: 0px;"></div></div>
@@ -209,8 +117,14 @@
 </template>
 
 <script>
+    import { addNew,updateItem,delItem ,filteDatas} from '../../store/actions'
 
     export default{
+        vuex:{
+            actions:{
+                filteDatas
+            }
+        },
         data(){
             return {
                 showTip: false
@@ -231,6 +145,13 @@
             showAllSmall(){
                 this.showTip = false
                 $(this.$els.addTip).removeClass('add-tip-small')
+            },
+            getAllThings(){
+
+            },
+            getImportantThings(){
+                this.filteDatas('normal')
+
             }
         },
         components: {
