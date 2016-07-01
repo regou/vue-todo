@@ -30,6 +30,10 @@ const mutations = {
         state.items.unshift({id:Date.now(), text: text, status: status, label: label, isEditing: true });
         localPush(state);
     },
+    PUSH_NEW:function (state, text, status, label) {
+        state.items.unshift({id:Date.now(), text: text, status: status, label: label, isEditing: false });
+        localPush(state);
+    },
     UPDATE_ITEM:function (state,updateData) {
         var idx = state.items.findIndex(o=>o.id === updateData.id);
         Object.assign(state.items[idx],updateData);
