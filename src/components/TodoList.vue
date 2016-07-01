@@ -11,12 +11,11 @@
 
 <script>
     import TodoItem from './TodoItem';
-    import remark from './container/remark.vue';
+//    import remark from './container/remark.vue';
     export default{
         props: ['collection'],
         components: {
-            'todo-item': TodoItem,
-            remark
+            'todo-item': TodoItem
         },
         events: {
             'item-deleted': function(model) {
