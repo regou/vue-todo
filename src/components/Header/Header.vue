@@ -98,7 +98,7 @@
 
     import voice from './voice.vue';
 
-    import { addNew } from '../../store/actions'
+    import { addNew,pushNew } from '../../store/actions'
 
     require('./css/weather-icons.min.css')
 
@@ -116,7 +116,8 @@
     export default{
         vuex:{
             actions:{
-                addNew
+                addNew,
+                pushNew
             }
         },
         data: function () {
@@ -146,10 +147,10 @@
         },
         methods: {
             onVoiceResult:function (data) {
+                console.info('onVoiceResult',data);
                 if(data && data.confidence >0 ){
-                    this.addNew(data.text || '', 'undone', 'normal');
+                    this.pushNew(data.text || '', 'undone','normal');
                 }
-                console.info(data);
             },
             add: function (event) {
                 this.addNew('Type a new task and hit enterpp', 'undone', 'normal');
