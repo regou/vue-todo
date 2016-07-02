@@ -20,7 +20,6 @@
     import Report from '../Report'
     import TodoList from '../TodoList'
 
-    import store from '../../store/index'
 
 
     export default {
@@ -34,11 +33,9 @@
                 }
             }
         },
-        store:store,
 
         ready: function () {
 
-            new Vidage('#VidageVideo');
 
         },
         created: function () {

@@ -139,7 +139,6 @@
                 }
             }
         },
-        store,
         data(){
             return {
                 showTip: false
