@@ -2,6 +2,8 @@
  * Created by wx on 6/23/16.
  */
 
+
+//          废止!废止!废止!废止!废止!废止!废止!废止!废止!废止!废止!废止!废止!废止!
 var ListStore = {
   state: {
     items: []

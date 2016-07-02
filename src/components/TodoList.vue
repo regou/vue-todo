@@ -1,13 +1,17 @@
 <template>
-<ul class="todo-list">
-        <todo-item v-for="item in collection" :model="item"></todo-item>
-    </ul>
-</template>
-<style>
+    <div>
 
-</style>
+        <ul class="todo-list">
+            <todo-item v-for="item in collection" :model="item" :remark="remark"></todo-item>
+        </ul>
+
+        <!--<remark > </remark>-->
+    </div>
+</template>
+
 <script>
     import TodoItem from './TodoItem';
+//    import remark from './container/remark.vue';
     export default{
         props: ['collection'],
         components: {
@@ -17,6 +21,17 @@
             'item-deleted': function(model) {
                 this.collection.$remove(model);
             }
+        },
+        ready(){
+
+        },
+        methods:{
+            remark(){
+//                this.$els.dialogRemark
+            }
         }
     }
 </script>
+<style>
+
+</style>

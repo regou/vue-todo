@@ -1,11 +1,11 @@
 <template>
-    <div class="middle-content">
+    <div class="middle-content full center-containner">
         <div id="app" class="container" v-if="true">
             <div class="todo-wrapper">
                 <todo-header></todo-header>
                 <div class="todo-content">
                     <todo-report></todo-report>
-                    <todo-list :collection="listState.items"></todo-list>
+                    <todo-list :collection="list"></todo-list>
                 </div>
             </div>
         </div>
@@ -20,20 +20,27 @@
     import Report from '../Report'
     import TodoList from '../TodoList'
 
-    import ListStore from '../../ListStore'
+
+
     export default {
-        data: function () {
-            return {
-                listState: ListStore.state
+        vuex: {
+            getters: {
+                mainstate: function(state){
+                    return state
+                },
+                list: function (state) {
+                    return state.items.filter(state.filterBy);
+                }
             }
         },
-        ready: function () {
-            ListStore.load();
 
-            new Vidage('#VidageVideo');
+        ready: function () {
+
+
         },
         created: function () {
             window.addEventListener('click', this.hideAction);
+            console.log(this.listState,2222)
         },
         beforeDestory: function () {
             window.removeEventListener('click', this.hideAction);

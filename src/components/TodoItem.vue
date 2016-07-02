@@ -26,9 +26,11 @@
                 <li @click="markDone" v-if="!isDone">Mark done</li>
                 <li @click="edit" v-if="!isDone">Edit</li>
                 <li @click="delete">Delete</li>
+                <li @click="remark">查看/备注</li>
             </ul>
         </div>
-        
+
+
     </li>
 </template>
     <style scope>
@@ -167,17 +169,31 @@
         width: 100%;
         background: 0 0;
     }
-    
+
     </style>
+<style>
+    .g-left::after{
+        content: ' ';
+        background: rgba(255,255,255,0.3);
+        filter:blur(10px);
+    }
+</style>
 <script>
+
+    import { addNew,updateItem,delItem } from '../store/actions'
     import ListStore from '../ListStore';
     import myCalendar from './calendar';
     export default{
-        props: ['model'],
+        vuex:{
+            actions:{
+                updateItem,
+                delItem
+            }
+        },
+        props: ['model','remark'],
         data: function() {
             return {
                 tempText: '',
-                show:false
             }
         },
         components: {
@@ -192,18 +208,19 @@
         methods: {
             save: function() {
                 if(this.tempText != '') {
-                    this.model.text = this.tempText;
                     this.model.isEditing = false;
 
-                    // local storage
-                    ListStore.push();
+                    this.updateItem({
+                        id:this.model.id,
+                        text:this.tempText
+                    })
                 }
             },
             markDone: function() {
-                this.model.status = "done"
-
-                // local storage
-                ListStore.push();
+                this.updateItem({
+                    id:this.model.id,
+                    status:"done"
+                })
             },
             edit: function() {
                 this.model.isEditing = true;
@@ -213,10 +230,7 @@
                 this.tempText = this.model.text;
             },
             delete: function() {
-                this.$dispatch('item-deleted', this.model);
-                this.$nextTick(function() {
-                    ListStore.push();
-                });
+                this.delItem(this.model);
             },
             showAction: function(event) {
                 event.stopPropagation();
@@ -243,10 +257,11 @@
                 }
             },
             saveLabel: function(type) {
-                this.model.label = type;
 
-                // local storage
-                ListStore.push();
+                this.updateItem({
+                    id:this.model.id,
+                    label:type
+                });
             }
         }
     }

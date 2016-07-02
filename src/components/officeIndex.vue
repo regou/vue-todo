@@ -1,3 +1,7 @@
+
+/**
+* Created by steven on 16/5/9.
+*/
 <template>
     <div class="intro-container container">
         <div class="logo">
@@ -6,7 +10,12 @@
                   <i class="icon-logo-inno"></i>
                 </span>
         </div>
-        <office-login></office-login>
+        <!--<component :is="login"></component>-->
+        <router-view></router-view>
+
+        <!--<office-login v-if="login =='login'"></office-login>-->
+
+        <!--<office-regist v-else></office-regist>-->
         <div class="intro-text">
             <h2 class="intro-title">让知识产权管理更简单</h2>
             <p class="desc">
@@ -25,6 +34,34 @@
         </div>
     </div>
 </template>
+
+<script>
+    import login from './officeLogin.vue';
+    import logout from './officeRegist.vue';
+    export default{
+        props: [],
+        data(){
+            return {
+                login: 'login',
+                hashValue: this.$route.name
+            }
+        },
+        watch:{
+            hashValue(newdata){
+                console.log(newdata,2222)
+                this.login = newdata
+            }
+        },
+        created(){
+            this.login = this.$route.name
+            console.log(this.$route.name,3333)
+        },
+        components: {
+            login,
+            logout
+        }
+    }
+</script>
 <style>
     .btn, .button, .col, .features-more .f-item, .intro, .platforms, .pop-download .msg-pop a, .section, .themes, button {
         box-sizing: border-box;
@@ -32,14 +69,13 @@
     .container {
         max-width: 100%;
         width: 71.5rem;
+        margin: 0 auto;
         display: block;
     }
     .header, .intro-container {
         transition: all 0.1s ease-in-out 0s;
     }
-    .container {
-        margin: 0 auto;
-    }
+
     p {
         font-size: 1rem;
         line-height: 2rem;
@@ -187,12 +223,3 @@
         padding: 0;
     }
 </style>
-<script>
-    import officeLogin from './officeLogin.vue'
-    export default{
-        props: [],
-        components: {
-            'office-login': officeLogin
-        }
-    }
-</script>

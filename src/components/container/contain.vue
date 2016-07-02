@@ -1,9 +1,8 @@
 <template>
-    <div class="main-all">
-        <top-translate></top-translate>
-        <left v-if=""></left>
-        <middle></middle>
-        <right v-if=""></right>
+    <div class="main-all full">
+        <left class="flex-stable" v-if="true"></left>
+        <middle class="flex-float" v-if="true"></middle>
+        <right class="flex-stable" v-if=""></right>
     </div>
 </template>
 
@@ -11,18 +10,19 @@
     import left from './left_list.vue';
     import middle from './middle_content.vue';
     import right from './right_info.vue';
-    import topTranslate from './topTranslate';
+    import store from '../../store/index';
     export default{
         props: [],
         components: {
             left,
             middle,
-            right,
-            topTranslate
+            right
         }
     }
 </script>
 
 <style>
-
+   .main-all{
+       z-index: 1;
+   }
 </style>

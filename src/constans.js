@@ -190,3 +190,48 @@ export var testForecast = [
         "text": "Thunderstorms"
     }
 ];
+
+
+
+
+
+function byAll(item) {
+    return true;
+}
+function byUrgent(item) {
+    return item.label == "urgent";
+}
+function byNormal(item) {
+    return item.label == "normal";
+}
+function byWhatever(item) {
+    return item.label == "other";
+}
+
+function byOneHour(item) {
+    let now = Date.now();
+//        console.log(now,now - 60*60*1000)
+    return item.createTime > now - 60*60*1000;
+}
+function byOneDay(item) {
+    let now = Date.now();
+//        console.log(now,now - 60*60*1000*24)
+    return item.createTime > now - 60*60*1000*24;
+}
+
+
+export var filterFuncs = {
+    byAll,
+    byUrgent,
+    byNormal,
+    byWhatever,
+    byOneHour,
+    byOneDay
+}
+
+export var filterRelations = new Map();
+filterRelations.set(byAll,'normal');
+filterRelations.set(byUrgent,'urgent');
+filterRelations.set(byWhatever,'other');
+
+
