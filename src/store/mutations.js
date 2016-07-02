@@ -26,10 +26,13 @@ export function getAccount(state) {
 function getCurrentFilterLabel(state) {
     var label = filterRelations.get(state.filterBy);
     return label || 'normal'
-  
+
 }
 
 const mutations = {
+    CHANGE_FORECAST:function(state,info){
+        state.forecast = info;
+    },
     // TODO: 放置我们的状态变更函数
     ADD_NEW:function (state, text, status,isEditing) {
         let now = Date.now();

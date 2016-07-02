@@ -100,18 +100,6 @@
 
     import { addNew,pushNew } from '../../store/actions'
 
-    require('./css/weather-icons.min.css')
-
-    function getForecast() {
-
-        return axios.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22suzhou%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys')
-            .then(function (resp) {
-                return Bro(resp).iCanHaz('data.query.results.channel.item.forecast')
-            })
-            .catch(function () {
-                return testForecast;
-            })
-    }
 
     export default{
         vuex:{
@@ -120,9 +108,8 @@
                 pushNew
             },
             getters: {
-                labelType: function (state) {
-//                    console.log(state.items.filter(state.filterBy)[0].label,4444)
-                    return state.items.filter(state.filterBy)[0].label;
+                forecast:function(state){
+                    return state.forecast
                 }
 
             }
@@ -137,12 +124,18 @@
                 forecastIconText: '',
             }
         },
+        computed: {
+
+            forecastIconClass: function () {
+                return this.forecast ? getWeatherIconClass(this.forecast.code) : '';
+
+            },
+            forecastIconText:function(){
+                return this.forecast ? this.forecast.text : '';
+            }
+        },
         created: function () {
-            getForecast()
-                .then((forecastArr) => {
-                    this.forecastIconClass = getWeatherIconClass(forecastArr[0].code);
-                    this.forecastIconText = forecastArr[0].text;
-                });
+
         },
         ready: function () {
             var d = new Date();

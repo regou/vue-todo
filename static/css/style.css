@@ -273,7 +273,7 @@ body {
 }
 
 .Vidage__image {
-    background-image: url('/static/video/mountain_lake.jpg');
+    /*background-image: url('/static/video/mountain_lake.jpg');*/
     background-position: 50%;
     background-repeat: no-repeat;
     -webkit-background-size: cover;
