@@ -8,6 +8,7 @@
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
     "test": "",
+    "server":"sh ./server.sh",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
@@ -46,6 +47,7 @@
     "lodash": "^4.13.1",
     "ora": "^0.2.0",
     "shelljs": "^0.6.0",
+    "simple-express-static-server": "github:spadin/simple-express-static-server",
     "url-loader": "^0.5.7",
     "vue-hot-reload-api": "^1.2.0",
     "vue-html-loader": "^1.0.0",
