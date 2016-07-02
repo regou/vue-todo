@@ -29,6 +29,15 @@ body {
     left: 0;
     right: 0;
 }
+@font-face {
+    font-family: 'piqad';
+    src: url('../fonts/piqad.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.lang-klingon{
+    font-family: 'piqad';
+}
 
 .clearfix {
     overflow: auto;
