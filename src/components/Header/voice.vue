@@ -1,9 +1,19 @@
 <template>
-    <div :class="['add-voice',{'voice-activate':isRecording}]" @click="recordHandler">
-        <i :class="isRecording?'vt-mute' : 'vt-mic' "></i>
+    <div :class="['voice-wrapper','animated',{'shake':isShaking}]">
+        <div :class="['add-voice',{'voice-activate':isRecording}]" @click="recordHandler">
+            <i :class="isRecording?'vt-mute' : 'vt-mic' "></i>
+        </div>
     </div>
 </template>
 <style>
+    .voice-wrapper{
+
+    }
+    .add-voice{
+        border-radius: 50%;
+        background: #5E35B1;
+        box-shadow: 0 0 13px #5E35B1;
+    }
     .add-voice::after{
         content: ' ';
         width: 6px;
@@ -53,31 +63,53 @@
 
                 comp.onResult({text:res.transcript,confidence:res.confidence})
                 comp.stop();
+
+                comp.hasResult = res.confidence>0;
             }
             recognition.onnomatch = function(event) {
                 console.log('nomatch: ' + event.results);
             }
             recognition.onerror = function(event) {
                 console.error(event);
+                comp.shake();
             }
             recognition.onspeechend = ()=>this.stop();
+            recognition.onstart = function(){
+                console.log('start');
+                comp.isRecording = true;
+                comp.hasResult = false;
+            };
+            recognition.onend = function(){
+                console.log('end');
+                comp.isRecording = false;
+                setTimeout(function(){
+                   if(!comp.hasResult){
+                       comp.shake();
+                   }
+                    comp.hasResult = false;
+                },2500)
+            }
         },
         data(){
             return{
                 isRecording:false,
-                recognition:undefined
+                recognition:undefined,
+                isShaking:false,
+                hasResult:false
             }
         },
         methods:{
+            shake:function(){
+                 this.isShaking = true;
+                setTimeout(()=>this.isShaking = false,2000);
+            },
             stop:function () {
                 this.recognition.stop();
-                this.isRecording = false;
             },
             recordHandler:function () {
                 if(!this.isRecording){
                     this.recognition.stop();
                     this.recognition.start();
-                    this.isRecording = true;
                 }else{
                     this.stop();
                 }

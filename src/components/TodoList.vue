@@ -2,7 +2,8 @@
     <div>
 
         <ul class="todo-list">
-            <todo-item v-for="item in collection" :model="item" :remark="remark"></todo-item>
+            <todo-item transition="vtslide" class="animated"
+                v-for="item in collection" track-by="id" :model="item" :remark="remark"></todo-item>
         </ul>
 
         <!--<remark > </remark>-->
@@ -12,6 +13,8 @@
 <script>
     import TodoItem from './TodoItem';
 //    import remark from './container/remark.vue';
+
+
     export default{
         props: ['collection'],
         components: {

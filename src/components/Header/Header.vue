@@ -64,10 +64,9 @@
         font-weight: 700
     }
 
-    .add-circle,.add-voice {
+    .add-circle,.voice-wrapper {
         position: absolute;
         color: #fff;
-        border-radius: 50%;
         width: 40px;
         height: 40px;
         line-height: 40px;
@@ -79,13 +78,13 @@
         box-shadow: 0 0 13px #ff3c41;
         right: 80px;
         bottom: -20px;
+        border-radius: 50%;
     }
-    .add-voice{
-        background: #5E35B1;
-        box-shadow: 0 0 13px #5E35B1;
+    .voice-wrapper{
         right: 20px;
         bottom: -20px;
     }
+
 
 </style>
 <script>

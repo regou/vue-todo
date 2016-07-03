@@ -1,6 +1,6 @@
 <template>
     <li class="todo-item" :class="{'editing': model.isEditing, 'task-done': isDone}" >
-            <div class="group-kind">
+            <div class="group-kind need-s">
                 <span @click="showLabel" class="label {{ model.label }}">
                     <ul class="action-pick-label action-popup">
                         <li @click="saveLabel('urgent')" class="important">Important</li>
@@ -10,17 +10,23 @@
                 </span>
             </div>
 
-        <p class="text" v-if="model.isEditing">
-            <input type="text" v-model="tempText" placeholder="Type a new task and hit enter" @keyup="save(el, true)" @keyup.enter="save(el, false)">
-        </p>
+        <div class="need-grow">
+            <p class="text" v-if="model.isEditing">
+                <input type="text" v-model="tempText" placeholder="Type a new task and hit enter" @keyup="save(el, true)" @keyup.enter="save(el, false)">
+            </p>
 
-        <p class="text" v-if="model.isEditing == false">{{ model.text }}</p>
+            <p class="text clearfix" v-if="model.isEditing == false">{{ model.text }}</p>
+        </div>
+
+        <div class="need-s">
             <my-calendar :todo="model"></my-calendar>
+        </div>
         <!-- Task action -->
-        <div class="todo-action" @click="showAction">
-                 <span class="more">
-                   <span></span><span></span><span></span>
-                 </span>
+
+        <div class="todo-action need-s" @click="showAction" v-if="model.isEditing == false || model.isEditing == null">
+             <span class="more">
+               <span></span><span></span><span></span>
+             </span>
 
             <ul class="action-list action-popup">
                 <li @click="markDone" v-if="(model.isEditing == false || model.isEditing == null) && !isDone">Mark done</li>
@@ -34,15 +40,31 @@
     </li>
 </template>
     <style scope>
+
+        .todo-item{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+
+            align-items: stretch;
+        }
+        .need-grow{
+            flex-grow: 1;
+        }
+        .need-s{
+            flex-shrink: 1;
+        }
+
      .todo-item {
         padding: 15px 15px;
         border-top: 1px solid #f1f1f1;
         position: relative;
-        height: 72px;
+        /*height: 72px;*/
         box-sizing:border-box;
     }
      .todo-item .group-kind{
-        float: left;
+        /*float: left;*/
         padding-top: 7px;
      }
      .todo-item.task-done .text {
@@ -50,11 +72,11 @@
     }
 
      .todo-item .text {
-        float:left;
+        /*float:left;*/
         margin-top: -2px;
         padding-left: 8px;
         padding-right: 8px;
-        width: calc(100% - 250px);
+        /*width: calc(100% - 250px);*/
     }
 
     .todo-item .action-popup {
@@ -97,7 +119,6 @@
         width: 15px;
         height: 15px;
         border-radius: 50%;
-        float: left;
         margin-right: 10px;
         position: relative;
         cursor: pointer;
@@ -139,13 +160,12 @@
     }
 
     .todo-item .todo-action {
-        position: absolute;
-        right: 20px;
-        top: 20px;
+        padding: 0 0 0 0.5em;
     }
 
     .todo-item .todo-action .more {
         cursor: pointer;
+        white-space: nowrap;
     }
 
     .todo-item .todo-action .more span {
@@ -171,13 +191,7 @@
     }
 
     </style>
-<style>
-    .g-left::after{
-        content: ' ';
-        background: rgba(255,255,255,0.3);
-        filter:blur(10px);
-    }
-</style>
+
 <script>
 
     import { addNew,updateItem,delItem } from '../store/actions'
