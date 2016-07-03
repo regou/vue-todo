@@ -3,16 +3,21 @@
  */
 
 import {filterRelations} from '../constans';
-export function localPush(state) {
-    window.localStorage.setItem(`todo-list-${state.user_id}`, JSON.stringify(state.items));
+export function localPush(state,target) {
+    if(target){
+        return window.localStorage.setItem(target, JSON.stringify(state[target]));
+    }
+    return window.localStorage.setItem(`todo-list-${state.user_id}`, JSON.stringify(state.items));
 }
 
-export function localLoad(state) {
-    var dataString = window.localStorage.getItem(`todo-list-${state.user_id}`) || '[]';
+export function localLoad(state,target,def) {
+    var target = target || `todo-list-${state.user_id}`;
+    var dataString = window.localStorage.getItem(target);
     if(dataString) {
-        state.items = JSON.parse(dataString);
+        return JSON.parse(dataString);
+    }else{
+        return def;
     }
-    return true;
 }
 
 export function getAccount(state) {
@@ -30,6 +35,10 @@ function getCurrentFilterLabel(state) {
 }
 
 const mutations = {
+    SET_ACCOUNT:function(state,name){
+        state.user_id = name || 'anonymous';
+        localPush(state,'user_id');
+    },
     CHANGE_FORECAST:function(state,info){
         state.forecast = info;
     },
