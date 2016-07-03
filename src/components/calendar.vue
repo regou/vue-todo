@@ -84,8 +84,9 @@ export default {
 	                format: 'YYYY-MM-DD hh:mm:ss',
 	                choose: function(dates){ //选择好日期的回调
 	                    var nowtamp=new Date().getTime();
-	                    var stringTime = $("#selectedTime").val();
-	                    var aftertamp=Date.parse(new Date(stringTime));
+
+	                    var aftertamp=Date.parse(new Date(dates));
+
 	                    var difference=aftertamp-nowtamp;
 	                    if(difference>=0){
 	                        setTimeout(function(){
@@ -93,7 +94,7 @@ export default {
 	                        }, difference);
 	                    }
 	            		//console.log(vm.timeMsg);
-	            		vm.todo.time=$(input).closest('div.time-promopt').find(".selectedTime").val();
+	            		vm.todo.time = dates;
 	            		vm.hasTime = vm.todo.time != "";
 	                    vm.updateItem({
 	                        id:vm.todo.id,

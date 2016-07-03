@@ -194,6 +194,9 @@ export var testForecast = [
 
 
 
+function getTime(item){
+    return item.timeStamp || item.createTime;
+}
 
 function byAll(item) {
     return true;
@@ -211,12 +214,13 @@ function byWhatever(item) {
 function byOneHour(item) {
     let now = Date.now();
 //        console.log(now,now - 60*60*1000)
-    return item.createTime > now - 60*60*1000;
+    return Math.abs(getTime(item) - now) < 60*60*1000;
+
 }
 function byOneDay(item) {
     let now = Date.now();
 //        console.log(now,now - 60*60*1000*24)
-    return item.createTime > now - 60*60*1000*24;
+    return Math.abs(getTime(item)- now) < 60*60*1000*24;
 }
 
 
