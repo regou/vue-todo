@@ -1,7 +1,8 @@
 <template>
 		<div @click="selectTime" :class="['time-promopt',{'uneditable':!todo.isEditing,'no-time':!hasTime}]">
 			<input type="text" class="selectedTime"  v-show="hasTime" transition="bounce"  v-if="todo.isEditing" v-model="todo.time">
-			<p class="model-time" v-if="todo.isEditing == false && hasTime" :class="[todo.status =='done' ? 'time': '']">{{ todo.time }}</p>
+			<p class="model-time" v-if="todo.isEditing == false && hasTime"
+               :class="[todo.status =='done' ? 'time': '']">{{ todo.time | simpleDate}}</p>
 			<span class="icon-time" v-if="todo.isEditing" v-show="!hasTime"></span>
 		</div>
 
