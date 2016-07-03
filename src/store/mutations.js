@@ -34,11 +34,11 @@ const mutations = {
         state.forecast = info;
     },
     // TODO: 放置我们的状态变更函数
-    ADD_NEW:function (state, text, status,isEditing) {
+    ADD_NEW:function (state, text, status,isEditing,time) {
         let now = Date.now();
         var label = getCurrentFilterLabel(state);
         // console.log()
-        state.items.unshift({id:now, createTime:now, text: text, status: status, label: label, isEditing: !!isEditing });
+        state.items.unshift({id:now, createTime:now, text: text, status: status, label: label, isEditing: !!isEditing ,time:time});
         localPush(state);
     },
     UPDATE_ITEM:function (state,updateData) {

@@ -1,5 +1,5 @@
 <template>
-    <li class="todo-item" :class="{'editing': model.isEditing, 'task-done': isDone}">
+    <li class="todo-item" :class="{'editing': model.isEditing, 'task-done': isDone}" >
             <div class="group-kind">
                 <span @click="showLabel" class="label {{ model.label }}">
                     <ul class="action-pick-label action-popup">
@@ -11,7 +11,7 @@
             </div>
 
         <p class="text" v-if="model.isEditing">
-            <input type="text" v-model="tempText" placeholder="Type a new task and hit enter" @keyup.enter="save">
+            <input type="text" v-model="tempText" placeholder="Type a new task and hit enter" @keyup.enter="save(el)">
         </p>
 
         <p class="text" v-if="model.isEditing == false">{{ model.text }}</p>
@@ -216,6 +216,13 @@
                     })
                 }
             },
+            // saveTime:function(time){
+            //     alert(time);
+            //     this.updateItem({
+            //         id:this.model.id,
+            //         time:time
+            //     });
+            // },
             markDone: function() {
                 this.updateItem({
                     id:this.model.id,
