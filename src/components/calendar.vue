@@ -84,7 +84,7 @@ export default {
 	                    var difference=aftertamp-nowtamp;
 	                    if(difference>=0){
 	                        setTimeout(function(){
-								push.create('您'+vm.myModel.text+"了");
+								push.create('您该'+vm.myModel.text+"了");
 	                        }, difference);
 	                    }
 	            		//console.log(vm.timeMsg);
