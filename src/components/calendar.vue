@@ -12,7 +12,7 @@
         cursor: default;
     }
 	.todo-item input.selectedTime{width: 130px;height: 30px;font-size: 12px;color: #555;border:1px solid #64a131;border-radius: 5px;padding-left: 4px;box-sizing:border-box;}
-	.model-time{width: 130px;height: 30px;font-size: 12px;color: #555;border:1px solid #64a131;border-radius: 5px;padding-left: 4px;box-sizing:border-box;}
+	.model-time{width: 130px;height: 30px;font-size: 12px;color: #555;border-radius: 5px;padding-left: 4px;box-sizing:border-box;}
 	.model-time.time{border:1px solid #ccc;background: #ccc;opacity: 0.5;}
 	.icon-time{
        display: inline-block;height:30px;width:30px;background: url("../../static/images/clock.png") no-repeat center center;background-size: contain;}
@@ -58,8 +58,7 @@ export default {
 	data(){
 		return {
 			show:false,
-			isClick:true,
-			hasTime:false
+			isClick:true
 		}
 	},
 	vuex:{
@@ -71,13 +70,22 @@ export default {
 		todo: Object
 	},
 	created:function(){
-    		this.hasTime = this.todo.time;
-    	},
+
+    },
+    computed: {
+
+        hasTime: function () {
+            return !!this.todo.time;
+
+        }
+    },
     methods:{
         selectTime(){
         	if(this.todo.isEditing){
-        		var input = event.target;
         		var vm=this;
+
+
+
 	            laydate({
 	                elem: '.selectedTime',
 	                istime: true,
@@ -88,21 +96,51 @@ export default {
 	                    var aftertamp=Date.parse(new Date(dates));
 
 	                    var difference=aftertamp-nowtamp;
+                        var notificationJobId;
+
+                        if(vm.todo.notificationJobId){
+                            clearTimeout(vm.todo.notificationJobId)
+                        }
+
 	                    if(difference>=0){
-	                        setTimeout(function(){
-								push.create('您该'+vm.todo.text+"了");
+                            notificationJobId = setTimeout(function(){
+
+                                Push.create('Hello World!', {
+                                    body: '您该'+vm.todo.text+"了",
+                                    icon: {
+                                        x16: '/static/reminder.png',
+                                        x32: '/static/reminder.png'
+                                    },
+                                    timeout: 10000
+                                });
+
 	                        }, difference);
 	                    }
 	            		//console.log(vm.timeMsg);
 	            		vm.todo.time = dates;
-	            		vm.hasTime = vm.todo.time != "";
+
 	                    vm.updateItem({
+                            notificationJobId,
 	                        id:vm.todo.id,
 	                        time:vm.todo.time,
                             timeStamp:aftertamp
 	                    })
 	                }
 	            });
+
+
+
+                if(Notification in window){
+                    if(Notification.permission != "granted"){
+                        Notification.requestPermission(function (permission) {
+                            if (permission === "granted") {
+                                var notification = new Notification("Hi there!");
+                            }
+                        });
+                    }
+                }
+
+
             }
 
         }
