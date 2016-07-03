@@ -26,9 +26,11 @@ const state = {
     allAccount: []
 };
 
-localLoad(state,'user_id','anonymous');
+state.user_id = localLoad(state,'user_id','anonymous');
 
-localLoad(state,'items',[]);
+state.items = localLoad(state,undefined,[]);
+
+window.state = state;
 
 
 export default new Vuex.Store({

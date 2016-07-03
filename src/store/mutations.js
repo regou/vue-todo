@@ -14,11 +14,10 @@ export function localLoad(state,target,def) {
     var target = target || `todo-list-${state.user_id}`;
     var dataString = window.localStorage.getItem(target);
     if(dataString) {
-        state[target] = JSON.parse(dataString);
+        return JSON.parse(dataString);
     }else{
-        state[target] = def;
+        return def;
     }
-    return true;
 }
 
 export function getAccount(state) {
