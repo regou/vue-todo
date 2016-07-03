@@ -1,7 +1,7 @@
 <template>
-		<div @click="selectTime" :class="['time-promopt',{'uneditable':!todo.isEditing}]">
+		<div @click="selectTime" :class="['time-promopt',{'uneditable':!todo.isEditing,'no-time':!hasTime}]">
 			<input type="text" class="selectedTime"  v-show="hasTime" transition="bounce"  v-if="todo.isEditing" v-model="todo.time">
-			<p class="model-time" v-if="todo.isEditing == false" :class="[todo.status =='done' ? 'time': '']">{{ todo.time }}</p>
+			<p class="model-time" v-if="todo.isEditing == false && hasTime" :class="[todo.status =='done' ? 'time': '']">{{ todo.time }}</p>
 			<span class="icon-time" v-if="todo.isEditing" v-show="!hasTime"></span>
 		</div>
 
@@ -11,9 +11,15 @@
     .time-promopt.uneditable{
         cursor: default;
     }
-	.todo-item input.selectedTime{width: 130px;height: 30px;font-size: 12px;color: #555;border:1px solid #64a131;border-radius: 5px;padding-left: 4px;box-sizing:border-box;}
-	.model-time{width: 130px;height: 30px;font-size: 12px;color: #555;border-radius: 5px;padding-left: 4px;box-sizing:border-box;}
-	.model-time.time{border:1px solid #ccc;background: #ccc;opacity: 0.5;}
+	.todo-item input.selectedTime{width: 130px;height: 30px;font-size: 12px;color: #555;
+        border:1px solid #64a131;
+        border-radius: 5px;padding-left: 4px;box-sizing:border-box;}
+	.model-time{
+        height: 30px;font-size: 12px;color: #555;
+        white-space: nowrap;
+        border:1px solid rgba(0,0,0,0);
+        border-radius: 5px;padding-left: 4px;box-sizing:border-box;}
+	.model-time.time{border:1px solid rgba(0,0,0,0); background: #ccc;opacity: 0.5;}
 	.icon-time{
        display: inline-block;height:30px;width:30px;background: url("../../static/images/clock.png") no-repeat center center;background-size: contain;}
    .bounce-transition {
