@@ -11,22 +11,22 @@
             </div>
 
         <p class="text" v-if="model.isEditing">
-            <input type="text" v-model="tempText" placeholder="Type a new task and hit enter" @keyup.enter="save(el)">
+            <input type="text" v-model="tempText" placeholder="Type a new task and hit enter" @keyup="save(el, true)" @keyup.enter="save(el, false)">
         </p>
 
         <p class="text" v-if="model.isEditing == false">{{ model.text }}</p>
             <my-calendar :todo="model"></my-calendar>
         <!-- Task action -->
-        <div class="todo-action" @click="showAction" v-if="model.isEditing == false || model.isEditing == null">
+        <div class="todo-action" @click="showAction">
                  <span class="more">
                    <span></span><span></span><span></span>
                  </span>
 
             <ul class="action-list action-popup">
-                <li @click="markDone" v-if="!isDone">Mark done</li>
-                <li @click="edit" v-if="!isDone">Edit</li>
+                <li @click="markDone" v-if="(model.isEditing == false || model.isEditing == null) && !isDone">Mark done</li>
+                <li @click="edit" v-if="(model.isEditing == false || model.isEditing == null) && !isDone">Edit</li>
                 <li @click="delete">Delete</li>
-                <li @click="remark">查看/备注</li>
+                <li @click="remark"  v-if="model.isEditing == false || model.isEditing == null" >查看/备注</li>
             </ul>
         </div>
 
@@ -206,9 +206,9 @@
 
         },
         methods: {
-            save: function() {
+            save: function(el, isEditing) {
                 if(this.tempText != '') {
-                    this.model.isEditing = false;
+                    this.model.isEditing = isEditing;
 
                     var time = this.model.time;
                     //console.log(time);

@@ -83,6 +83,7 @@ export default {
 	                istime: true,
 	                format: 'YYYY-MM-DD hh:mm:ss',
 	                choose: function(dates){ //选择好日期的回调
+	                    vm.todo.isEditing = false;
 	                    var nowtamp=new Date().getTime();
 
 	                    var aftertamp=Date.parse(new Date(dates));
