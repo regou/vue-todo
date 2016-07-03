@@ -134,7 +134,6 @@ export default {
                     if(Notification.permission != "granted"){
                         Notification.requestPermission(function (permission) {
                             if (permission === "granted") {
-                                var notification = new Notification("Hi there!");
                             }
                         });
                     }
