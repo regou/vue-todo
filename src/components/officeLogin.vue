@@ -104,8 +104,14 @@
 </template>
 
 <script>
+    import {setAccount} from '../store/actions';
     export default{
         props: [],
+        vuex:{
+            actions:{
+                setAccount
+            }
+        },
         created(){
 
         },
@@ -120,7 +126,13 @@
                 })
                 let getAccount = localStorage.getItem('account') ? JSON.parse(localStorage.getItem('account')) : '';
                 if (getAccount){
-                    _.find(getAccount,newAccount)? self.$router.go({name:'contain'}): self.$router.go({name:'logout'});
+                    if( _.find(getAccount,newAccount)){
+                        self.setAccount(newAccount.name || newAccount.email);
+                        self.$router.go({name:'contain'})
+                    }else{
+                        self.$router.go({name:'logout'})
+                    }
+
                 }else {
                     self.$router.go({name:'logout'})
                 }

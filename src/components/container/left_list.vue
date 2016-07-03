@@ -15,7 +15,7 @@
                     <a class="boult">
                         <img class="avatar" src="/static/images/avatar-new.png">
                     </a>
-                    <span class="username t-name">qjliang_1213</span>
+                    <span class="username t-name">{{account}}</span>
                 </div>
 
             </div>
@@ -119,6 +119,7 @@
                 filteDatas
             },
             getters: {
+                account:function(state){return state.user_id},
                 countAll: function (state) {
                     return state.items.filter(filterFuncs.byAll).length;
                 },

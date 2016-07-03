@@ -4,6 +4,7 @@
 
 
 //如果涉及到异步,请不要直接调用makeAction,要Promise解决后dispatch
+export const setAccount = makeAction('SET_ACCOUNT');
 export const changeForecast = makeAction('CHANGE_FORECAST');
 export const addNew = makeAction('ADD_NEW');
 export const pushNew = makeAction('PUSH_NEW');
