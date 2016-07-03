@@ -1,13 +1,16 @@
 <template>
-		<div @click="selectTime" class="time-promopt">
-			<input type="text" class="selectedTime"  v-show="hasTime" transition="bounce"  v-if="myModel.isEditing" v-model="myModel.time">
-			<p class="model-time" v-if="myModel.isEditing == false" :class="[myModel.status =='done' ? 'time': '']">{{ myModel.time }}</p>
-			<span class="icon-time" v-if="myModel.isEditing" v-show="!hasTime"></span>
+		<div @click="selectTime" :class="['time-promopt',{'uneditable':!todo.isEditing}]">
+			<input type="text" class="selectedTime"  v-show="hasTime" transition="bounce"  v-if="todo.isEditing" v-model="todo.time">
+			<p class="model-time" v-if="todo.isEditing == false" :class="[todo.status =='done' ? 'time': '']">{{ todo.time }}</p>
+			<span class="icon-time" v-if="todo.isEditing" v-show="!hasTime"></span>
 		</div>
-		
+
 </template>
 <style scope>
 	.time-promopt{float: left;cursor: pointer;max-width: 130px;height: 30px;}
+    .time-promopt.uneditable{
+        cursor: default;
+    }
 	.todo-item input.selectedTime{width: 130px;height: 30px;font-size: 12px;color: #555;border:1px solid #64a131;border-radius: 5px;padding-left: 4px;box-sizing:border-box;}
 	.model-time{width: 130px;height: 30px;font-size: 12px;color: #555;border:1px solid #64a131;border-radius: 5px;padding-left: 4px;box-sizing:border-box;}
 	.model-time.time{border:1px solid #ccc;background: #ccc;opacity: 0.5;}
@@ -65,19 +68,19 @@ export default {
         }
     },
 	props:{
-		myModel: Object
+		todo: Object
 	},
 	created:function(){
-    		this.hasTime = this.myModel.time;
+    		this.hasTime = this.todo.time;
     	},
     methods:{
         selectTime(){
-        	if(this.myModel.isEditing){
+        	if(this.todo.isEditing){
         		var input = event.target;
         		var vm=this;
 	            laydate({
 	                elem: '.selectedTime',
-	                istime: true, 
+	                istime: true,
 	                format: 'YYYY-MM-DD hh:mm:ss',
 	                choose: function(dates){ //选择好日期的回调
 	                    var nowtamp=new Date().getTime();
@@ -86,20 +89,21 @@ export default {
 	                    var difference=aftertamp-nowtamp;
 	                    if(difference>=0){
 	                        setTimeout(function(){
-								push.create('您该'+vm.myModel.text+"了");
+								push.create('您该'+vm.todo.text+"了");
 	                        }, difference);
 	                    }
 	            		//console.log(vm.timeMsg);
-	            		vm.myModel.time=$(input).closest('div.time-promopt').find(".selectedTime").val();
-	            		vm.hasTime = vm.myModel.time != "";
+	            		vm.todo.time=$(input).closest('div.time-promopt').find(".selectedTime").val();
+	            		vm.hasTime = vm.todo.time != "";
 	                    vm.updateItem({
-	                        id:vm.myModel.id,
-	                        time:vm.myModel.time
+	                        id:vm.todo.id,
+	                        time:vm.todo.time,
+                            timeStamp:aftertamp
 	                    })
 	                }
-	            });    
+	            });
             }
-            
+
         }
     }
 };

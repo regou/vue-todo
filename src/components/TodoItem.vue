@@ -15,7 +15,7 @@
         </p>
 
         <p class="text" v-if="model.isEditing == false">{{ model.text }}</p>
-            <my-calendar :my-model="model"></my-calendar>
+            <my-calendar :todo="model"></my-calendar>
         <!-- Task action -->
         <div class="todo-action" @click="showAction" v-if="model.isEditing == false || model.isEditing == null">
                  <span class="more">
