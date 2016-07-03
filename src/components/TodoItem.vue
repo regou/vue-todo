@@ -210,10 +210,35 @@
                 if(this.tempText != '') {
                     this.model.isEditing = false;
 
+                    var time = this.model.time;
+                    //console.log(time);
+                    if(!time){
+                        var date=new Date();
+                        var seperator1 = "-";
+                        var seperator2 = ":";
+                        var month = date.getMonth() + 1;
+                        var strDate = date.getDate();
+                        var sec=date.getSeconds();
+                        if (month >= 1 && month <= 9) {
+                            month = "0" + month;
+                        }
+                        if (strDate >= 0 && strDate <= 9) {
+                            strDate = "0" + strDate;
+                        }
+                        if (sec >= 0 && sec <= 9) {
+                            sec = "0" + sec;
+                        }
+                        time = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                            + " " + date.getHours() + seperator2 + date.getMinutes()
+                            + seperator2 + sec;
+                    }
+
                     this.updateItem({
                         id:this.model.id,
-                        text:this.tempText
+                        text:this.tempText,
+                        time:time
                     })
+
                 }
             },
             // saveTime:function(time){

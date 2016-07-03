@@ -1,8 +1,8 @@
 <template>
 		<div @click="selectTime" class="time-promopt">
-			<input type="text" class="selectedTime"  v-show="myModel.time" transition="bounce"  v-if="myModel.isEditing" v-model="myModel.time">
+			<input type="text" class="selectedTime"  v-show="hasTime" transition="bounce"  v-if="myModel.isEditing" v-model="myModel.time">
 			<p class="model-time" v-if="myModel.isEditing == false" :class="[myModel.status =='done' ? 'time': '']">{{ myModel.time }}</p>
-			<span class="icon-time" v-if="myModel.isEditing" v-show="!myModel.time"></span>
+			<span class="icon-time" v-if="myModel.isEditing" v-show="!hasTime"></span>
 		</div>
 		
 </template>
@@ -56,7 +56,7 @@ export default {
 		return {
 			show:false,
 			isClick:true,
-			timeMsg:"text"
+			hasTime:false
 		}
 	},
 	vuex:{
@@ -67,11 +67,13 @@ export default {
 	props:{
 		myModel: Object
 	},
+	created:function(){
+    		this.hasTime = this.myModel.time;
+    	},
     methods:{
         selectTime(){
         	if(this.myModel.isEditing){
-        		//this.isClick=false;
-        		//this.show=true;
+        		var input = event.target;
         		var vm=this;
 	            laydate({
 	                elem: '.selectedTime',
@@ -88,9 +90,11 @@ export default {
 	                        }, difference);
 	                    }
 	            		//console.log(vm.timeMsg);
+	            		vm.myModel.time=$(input).closest('div.time-promopt').find(".selectedTime").val();
+	            		vm.hasTime = vm.myModel.time != "";
 	                    vm.updateItem({
 	                        id:vm.myModel.id,
-	                        time:$(".selectedTime").val()
+	                        time:vm.myModel.time
 	                    })
 	                }
 	            });    
