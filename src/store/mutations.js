@@ -28,7 +28,7 @@ export function getAccount(state) {
     return true;
 }
 
-function getCurrentFilterLabel(state) {
+export function getCurrentFilterLabel(state) {
     var label = filterRelations.get(state.filterBy);
     return label || 'normal'
 

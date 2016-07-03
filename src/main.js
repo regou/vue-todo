@@ -7,6 +7,12 @@ window.$ = window.jQuery = require('jquery')
 /* eslint-disable no-new */
 
 Vue.use(VueRouter);
+
+Vue.transition('vtslide', {
+    enterClass: 'bounceInLeft',
+    leaveClass: 'bounceOutRight'
+});
+
 let vueRouter = new VueRouter();
 vueRouter.map(router);
 vueRouter.start(Index, '#master-wrapper');
