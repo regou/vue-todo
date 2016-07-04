@@ -52,7 +52,7 @@
             return _.sample(['thesimpleblackness'])
         }
         if(isInclude(['sun','clear','hot'])){
-            return _.sample(['summer_field','sandy_beach','andnowisee'])
+            return _.sample(['summer_field','sandy_beach','andnowisee','thesimpleblackness'])
         }
 
         return ['mountain_lake']

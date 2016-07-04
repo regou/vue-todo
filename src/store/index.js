@@ -11,12 +11,12 @@ Vue.use(Vuex);
 
 const state = {
     forecast:{
-        "code": "4",
-        "date": "24 Jun 2016",
-        "day": "Fri",
+        "code": "32",
+        "date": "4 July 2016",
+        "day": "Mon",
         "high": "87",
         "low": "75",
-        "text": "Thunderstorms"
+        "text": "Sunny"
     },
     filterBy:function (item,status) {
         return true
