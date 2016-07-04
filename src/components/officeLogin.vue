@@ -158,7 +158,7 @@
 
     .sign {
         color: #333;
-        margin: 48px auto;
+        margin: 0px auto;
         max-width: 400px;
         min-width: 300px;
         float: right;

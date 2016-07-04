@@ -7,7 +7,7 @@
         <div class="logo">
                 <span class="icon logo">
                   <!--<i class="icon-logo icon_sign"></i>-->
-                  <i class="icon-logo-inno"></i>
+                  <i class="icon-logo-inno">QINJILIANG</i>
                 </span>
         </div>
         <!--<component :is="login"></component>-->
@@ -19,7 +19,7 @@
         <div class="intro-text">
             <h2 class="intro-title">让知识产权管理更简单</h2>
             <p class="desc">
-                Innosnap知识产权管理系统，是PatSnap智慧芽公司着力打造的知识产权管理解决方案。                        </p>
+                QINJILIANG知识产权管理系统，是PatSnap智慧芽公司着力打造的知识产权管理解决方案。                        </p>
             <p class="desc">
                 全球百万用户的共同选择。                        </p>
             <div class="visible-desktop">
@@ -84,7 +84,7 @@
         height: 100vh;
         min-height: 37.5rem;
         overflow: hidden;
-        padding-top: 4.75rem;
+        padding-top: 0.75rem;
         position: relative;
         top: 0;
         width: 100%;

@@ -172,12 +172,16 @@ body {
     opacity: .2
 }
 .icon-logo-inno{
+    font-size: 26px;
+    font-weight: bold;
+    color: #fff;
     width: 100%;
     height: 82px;
-    background: url('/static/images/logo_innosnap_100_w.png') no-repeat 0 0;
+    /* background: url('/static/images/logo_innosnap_100_w.png') no-repeat 0 0; */
     display: inline-block;
 }
 span.logo,div.logo {
     width: 365px;
     height: 100px;
+    text-align: left;
 }

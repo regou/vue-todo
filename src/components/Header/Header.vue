@@ -124,7 +124,6 @@
             }
         },
         computed: {
-
             forecastIconClass: function () {
                 return this.forecast ? getWeatherIconClass(this.forecast.code) : '';
 
