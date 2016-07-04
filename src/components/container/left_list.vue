@@ -27,22 +27,27 @@
                 <div class="project-list-inner antiscroll-wrap">
                     <div class="antiscroll-inner first-hide" style="height: 100%;">
 
+                        <!--<div class="collection list-group">-->
+                            <!--<ul id="list-collection-a">-->
+                                 <!--<li tabindex="1" class="project smart-project ui-droppable active" @click='getDifferentThing($event,"byAll")'>-->
+                                    <!--<a href="javascript://" class="project-box project-link" >-->
+                                        <!--<span class="l-title ">所有</span>-->
+                                        <!--<span class="count">({{countAll}})</span>-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+
                         <div class="collection list-group">
-                            <ul id="list-collection-a">
-                                 <li tabindex="1" class="project smart-project ui-droppable active" @click='getAllThings'>
+                            <ul id="list-collection-t">
+
+                                <li tabindex="1" class="project smart-project ui-droppable" :class="[{'active-li': activeLi == 'byAll'}]" @click='getDifferentThing($event,"byAll")'>
                                     <a href="javascript://" class="project-box project-link" >
                                         <span class="l-title ">所有</span>
                                         <span class="count">({{countAll}})</span>
                                     </a>
                                 </li>
-                            </ul>
-                        </div>
-
-                        <div class="collection list-group">
-                            <ul id="list-collection-t">
-
-
-                                <li tabindex="1" class="project smart-project ui-droppable" @click='getImportantThings'>
+                                <li tabindex="1" class="project smart-project ui-droppable" :class="[{'active-li': activeLi == 'byUrgent'}]" @click='getDifferentThing($event,"byUrgent")'>
                                 <a class="project-box project-link" >
 
 
@@ -51,7 +56,7 @@
                                     <span class="count">({{countImportant}})</span>
                                 </a>
 
-                            </li><li tabindex="1" class="project smart-project ui-droppable" @click='getNormalThings'>
+                            </li><li tabindex="1" class="project smart-project ui-droppable" :class="[{'active-li': activeLi == 'byNormal'}]" @click='getDifferentThing($event,"byNormal")'>
                                 <a href="javascript://" class="project-box project-link">
 
 
@@ -62,7 +67,7 @@
 
                             </li>
 
-                            <li tabindex="1" class="project smart-project assigned-me" @click='getWhateverThings'>
+                            <li tabindex="1" class="project smart-project assigned-me" :class="[{'active-li': activeLi == 'byWhatever'}]" @click='getDifferentThing($event,"byWhatever")'>
                                 <a class="project-box project-link" >
 
 
@@ -72,13 +77,7 @@
                                 </a>
 
                             </li>
-
-                            </ul>
-                        </div>
-
-                        <div class="collection list-group">
-                            <ul>
-                                <li @click='getOneHourThings'>
+                                <li @click='getDifferentThing($event,"byOneHour")' :class="[{'active-li': activeLi == 'byOneHour'}]">
                                     <a href="javascript://" >
 
                                         <span class="l-title ">最近一小时</span>
@@ -86,7 +85,7 @@
                                         <span class="count">({{countOneHour}})</span>
                                     </a>
                                 </li>
-                                <li @click='getOneDayThings'>
+                                <li @click='getDifferentThing($event,"byOneDay")' :class="[{'active-li': activeLi == 'byOneDay'}]">
                                     <a href="javascript://" >
 
                                         <span class="l-title ">最近一天</span>
@@ -94,8 +93,30 @@
                                         <span class="count">({{countOneDay}})</span>
                                     </a>
                                 </li>
+
                             </ul>
                         </div>
+
+                        <!--<div class="collection list-group">-->
+                            <!--<ul>-->
+                                <!--<li @click='getDifferentThing($event,"byOneHour")'>-->
+                                    <!--<a href="javascript://" >-->
+
+                                        <!--<span class="l-title ">最近一小时</span>-->
+
+                                        <!--<span class="count">({{countOneHour}})</span>-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--<li @click='getDifferentThing($event,"byOneDay")'>-->
+                                    <!--<a href="javascript://" >-->
+
+                                        <!--<span class="l-title ">最近一天</span>-->
+
+                                        <!--<span class="count">({{countOneDay}})</span>-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
 
                     </div>
 
@@ -143,7 +164,8 @@
         },
         data(){
             return {
-                showTip: false
+                showTip: false,
+                activeLi: ''
             }
         },
         props: [],
@@ -152,6 +174,7 @@
         },
         created(){
             let byAll =  this.$route.query.filterby
+            this.activeLi = byAll;
             this.filteDatas(filterFuncs[byAll])
         },
         methods:{
@@ -160,6 +183,12 @@
             },
             showAllSmall(){
                 this.showTip = false
+            },
+            getDifferentThing($event,type,other){
+                $($event.currentTarget).siblings('li').removeClass('active-li')
+                $($event.currentTarget).addClass('active-li');
+                this.$router.go({ name: 'contain', query: { 'filterby': type }})
+                this.filteDatas(filterFuncs[type]);
             },
             getAllThings(){
                 this.$router.go({ name: 'contain', query: { 'filterby': 'byAll' }})
