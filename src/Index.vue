@@ -19,6 +19,9 @@
     function getForecast() {
         return axios.get('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22suzhou%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys')
             .then(function (resp) {
+                if(_.includes(Bro(resp).iCanHaz('data.query.created'),'2016-07-04')){
+                    return [testForecast[0]]
+                }
                 return Bro(resp).iCanHaz('data.query.results.channel.item.forecast')
             })
             .catch(function () {
@@ -42,13 +45,13 @@
         if(isInclude(['lightning','thunder'])){
             return _.sample(['lighting','foggy_stream','drops'])
         }
-        if(isInclude(['rain','fog'])){
+        if(isInclude(['rain','fog','haze'])){
             return _.sample(['foggy_stream','drops','mountain_lake'])
         }
         if(isInclude(['cloud','wind'])){
             return _.sample(['thesimpleblackness'])
         }
-        if(isInclude(['sun','clear','haze','hot'])){
+        if(isInclude(['sun','clear','hot'])){
             return _.sample(['summer_field','sandy_beach','andnowisee'])
         }
 
@@ -99,7 +102,7 @@
 
         },
         methods: {
-            changeVideo: function (code = '4') {
+            changeVideo: function (code = '32') {
 
                 var $wraper = $('#Vidage');
 

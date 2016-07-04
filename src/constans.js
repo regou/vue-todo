@@ -110,12 +110,12 @@ export function getWeatherIconClass(condid) {
 
 export var testForecast = [
     {
-        "code": "4",
-        "date": "24 Jun 2016",
-        "day": "Fri",
+        "code": "32",
+        "date": "44 July 2016",
+        "day": "Mon",
         "high": "87",
         "low": "75",
-        "text": "Thunderstorms"
+        "text": "Sunny"
     },
     {
         "code": "11",
