@@ -7,7 +7,7 @@
             <span class="month">{{ month }}, {{ year }}</span>
         </time>
         <i :title="forecastIconText" v-bind:class="['wi-icon','wi',forecastIconClass]"></i>
-        <div class="add-circle" @click="add">
+        <div :class="['add-circle',filterType]" @click="add">
             <i class="fa fa-plus"></i>
         </div>
         <voice :lang="'zh-CN'" :on-result="onVoiceResult"></voice>
@@ -74,12 +74,13 @@
         cursor: pointer
     }
     .add-circle{
-        background: #ff3c41;
-        box-shadow: 0 0 13px #ff3c41;
         right: 80px;
         bottom: -20px;
         border-radius: 50%;
     }
+    .add-circle.normal{background: #1DE9B6;box-shadow: 0 0 13px #1DE9B6;}
+    .add-circle.urgent{background: #ff3c41;box-shadow: 0 0 13px #ff3c41;}
+    .add-circle.other{background: #0277BD;box-shadow: 0 0 13px #0277BD;}
     .voice-wrapper{
         right: 20px;
         bottom: -20px;
@@ -93,7 +94,7 @@
 
     import Bro from 'brototype';
     import axios from 'axios';
-    import {getWeatherIconClass,testForecast} from '../../constans';
+    import {getWeatherIconClass,testForecast,filterFuncs,filterRelations} from '../../constans';
 
     import voice from './voice.vue';
 
@@ -124,6 +125,12 @@
             }
         },
         computed: {
+
+            filterType: function () {
+                let filterBy = this.$route.query.filterby;
+                return filterRelations.get(filterFuncs[filterBy]) || 'normal';
+            },
+
             forecastIconClass: function () {
                 return this.forecast ? getWeatherIconClass(this.forecast.code) : '';
 
