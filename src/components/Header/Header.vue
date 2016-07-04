@@ -98,18 +98,23 @@
 
     import voice from './voice.vue';
 
-    import { addNew,pushNew } from '../../store/actions'
+    import { addNew,pushNew,delItem,updateItem } from '../../store/actions'
 
 
     export default{
         vuex:{
             actions:{
                 addNew,
-                pushNew
+                pushNew,
+                delItem,
+                updateItem
             },
             getters: {
                 forecast:function(state){
                     return state.forecast
+                },
+                list: function (state) {
+                    return state.items.filter(state.filterBy);
                 }
 
             }
@@ -152,13 +157,36 @@
         },
         methods: {
             onVoiceResult:function (data) {
+                var comp = this;
                 console.info('onVoiceResult',data);
                 if(data && data.confidence >0 ){
-                    this.addNew(data.text || '', 'undone',false);
+
+                    let last = comp.list[0];
+                    if(last){
+                        switch (data.text){
+                            case '确认':
+                            case '确定':
+                                comp.updateItem({
+                                    id:last.id,
+                                    isEditing:false
+                                })
+                                break;
+                            case '撤销':
+                            case '取消':
+                            case '删除':
+                                comp.delItem(last)
+                                break;
+                            default:
+                                comp.addNew(data.text || '', 'undone',false);
+                        }
+                    }else{
+                        comp.addNew(data.text || '', 'undone',true);
+                    }
+
                 }
             },
             add: function (event) {
-                this.addNew('Type a new task and hit enter', 'undone',true);
+                this.addNew('', 'undone',true);
             }
         },
         components: {
