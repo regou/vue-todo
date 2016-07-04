@@ -1,5 +1,6 @@
 <template>
     <li class="todo-item" :class="{'editing': model.isEditing, 'task-done': isDone}" >
+        <div class="need-flex">
             <div class="group-kind need-s">
                 <span @click="showLabel" class="label {{ model.label }}">
                     <ul class="action-pick-label action-popup">
@@ -35,15 +36,20 @@
                 <li @click="remark"  v-if="model.isEditing == false || model.isEditing == null" >查看/备注</li>
             </ul>
         </div>
-
-
+        </div>
+        <div v-if="model.showRemark==true">
+            <textarea style="width:98%;" @blur="saveRemark()" v-model="model.remark"></textarea>
+        </div>
     </li>
 </template>
     <style scope>
 
         .todo-item{
+
+        }
+        .need-flex{
             display: flex;
-            flex-direction: row;
+           flex-direction: row;
             flex-wrap: nowrap;
             justify-content: space-between;
 
@@ -220,6 +226,16 @@
 
         },
         methods: {
+            saveRemark:function(){
+                this.model.showRemark = false;
+                this.updateItem({
+                    id:this.model.id,
+                    remark:this.model.remark
+                });
+            },
+            remark:function(){
+                this.model.showRemark = true;
+            },
             save: function(el, isEditing) {
                 if(this.tempText != '') {
                     this.model.isEditing = isEditing;
