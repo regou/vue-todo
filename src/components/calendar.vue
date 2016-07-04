@@ -77,6 +77,13 @@ export default {
 		todo: Object
 	},
 	created:function(){
+        if(this.todo.timeStamp){
+            var notificationJobId = this.remind(this.todo.timeStamp);
+            this.updateItem({
+                notificationJobId:notificationJobId,
+                id:this.todo.id
+            })
+        }
 
     },
     computed: {
@@ -87,6 +94,32 @@ export default {
         }
     },
     methods:{
+        remind:function(aftertamp){
+            var nowtamp=new Date().getTime();
+            var difference=aftertamp-nowtamp;
+            var notificationJobId;
+            var vm=this;
+            if(this.todo.notificationJobId){
+                clearTimeout(this.todo.notificationJobId)
+            }
+
+            if(difference>=0){
+                notificationJobId = setTimeout(function(){
+
+                    push.create('todo事项提醒', {
+                        body: '您该'+vm.todo.text+"了",
+                        icon: {
+                            x16: '/static/reminder.png',
+                            x32: '/static/reminder.png'
+                        },
+                        timeout: 10000
+                    });
+
+                }, difference);
+            }
+
+            return notificationJobId;
+        },
         selectTime(){
         	if(this.todo.isEditing){
         		var vm=this;
@@ -99,36 +132,23 @@ export default {
 	                format: 'YYYY-MM-DD hh:mm:ss',
 	                choose: function(dates){ //选择好日期的回调
 	                    vm.todo.isEditing = false;
-	                    var nowtamp=new Date().getTime();
+	                    //var nowtamp=new Date().getTime();
 
 	                    var aftertamp=Date.parse(new Date(dates));
 
-	                    var difference=aftertamp-nowtamp;
-                        var notificationJobId;
+	                    //var difference=aftertamp-nowtamp;
+                        //var notificationJobId;
 
-                        if(vm.todo.notificationJobId){
-                            clearTimeout(vm.todo.notificationJobId)
-                        }
+                        //if(vm.todo.notificationJobId){
+                        //    clearTimeout(vm.todo.notificationJobId)
+                        //}
+                        var notificationJobId = vm.remind(aftertamp);
 
-	                    if(difference>=0){
-                            notificationJobId = setTimeout(function(){
-
-                                Push.create('Hello World!', {
-                                    body: '您该'+vm.todo.text+"了",
-                                    icon: {
-                                        x16: '/static/reminder.png',
-                                        x32: '/static/reminder.png'
-                                    },
-                                    timeout: 10000
-                                });
-
-	                        }, difference);
-	                    }
 	            		//console.log(vm.timeMsg);
 	            		vm.todo.time = dates;
 
 	                    vm.updateItem({
-                            notificationJobId,
+                            notificationJobId:notificationJobId,
 	                        id:vm.todo.id,
 	                        time:vm.todo.time,
                             timeStamp:aftertamp
