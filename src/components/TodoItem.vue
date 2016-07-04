@@ -23,7 +23,7 @@
         </div>
         <!-- Task action -->
 
-        <div class="todo-action need-s" @click="showAction" v-if="model.isEditing == false || model.isEditing == null">
+        <div class="todo-action need-s" @click="showAction">
              <span class="more">
                <span></span><span></span><span></span>
              </span>
