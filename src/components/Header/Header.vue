@@ -29,7 +29,7 @@
 
     .todo-header {
         border-radius: 6px 6px 0 0;
-        background: url('/static/video/wow.jpg') no-repeat;
+        background: url('/static/video/sunny.png') no-repeat;
         background-size: cover;
         padding: 55px 20px;
         position: relative
