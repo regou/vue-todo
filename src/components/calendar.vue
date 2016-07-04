@@ -106,6 +106,9 @@ export default {
             if(difference>=0){
                 notificationJobId = setTimeout(function(){
 
+                    if(vm.todo.status == 'done'){
+                        return;
+                    }
                     push.create('todo事项提醒', {
                         body: '您该'+vm.todo.text+"了",
                         icon: {
