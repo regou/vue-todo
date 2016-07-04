@@ -158,7 +158,7 @@ export default {
 
 
 
-                if(Notification in window){
+                if(window.Notification){
                     if(Notification.permission != "granted"){
                         Notification.requestPermission(function (permission) {
                             if (permission === "granted") {
