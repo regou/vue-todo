@@ -173,7 +173,7 @@
 
         },
         created(){
-            let byAll =  this.$route.query.filterby
+            let byAll =  this.$route.query.filterby || 'byAll'
             this.activeLi = byAll;
             this.filteDatas(filterFuncs[byAll])
         },
@@ -189,30 +189,6 @@
                 $($event.currentTarget).addClass('active-li');
                 this.$router.go({ name: 'contain', query: { 'filterby': type }})
                 this.filteDatas(filterFuncs[type]);
-            },
-            getAllThings(){
-                this.$router.go({ name: 'contain', query: { 'filterby': 'byAll' }})
-                this.filteDatas(filterFuncs.byAll)
-            },
-            getImportantThings(){
-                this.$router.go({ name: 'contain', query: { 'filterby': 'byUrgent' }})
-                this.filteDatas(filterFuncs.byUrgent)
-            },
-            getNormalThings(){
-                this.$router.go({ name: 'contain', query: { 'filterby': 'byNormal' }})
-                this.filteDatas(filterFuncs.byNormal)
-            },
-            getWhateverThings(){
-                this.$router.go({ name: 'contain', query: { 'filterby': 'byWhatever' }})
-                this.filteDatas(filterFuncs.byWhatever)
-            },
-            getOneHourThings(){
-                this.$router.go({ name: 'contain', query: { 'filterby': 'byOneHour' }})
-                this.filteDatas(filterFuncs.byOneHour)
-            },
-            getOneDayThings(){
-                this.$router.go({ name: 'contain', query: { 'filterby': 'byOneDay' }})
-                this.filteDatas(filterFuncs.byOneDay)
             },
             logoutUser(){
 
