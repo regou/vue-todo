@@ -17,13 +17,13 @@
 
         <!--<office-regist v-else></office-regist>-->
         <div class="intro-text">
-            <h2 class="intro-title">让知识产权管理更简单</h2>
+            <h2 class="intro-title">让企业内部协作更简单</h2>
             <p class="desc">
-                QINJILIANG知识产权管理系统，是PatSnap智慧芽公司着力打造的知识产权管理解决方案。                        </p>
+                QINJILIANG管理系统，是WANGXIAO公司着力打造的企业内部协作解决方案。                        </p>
             <p class="desc">
                 全球百万用户的共同选择。                        </p>
             <div class="visible-desktop">
-                <a class="signup btn-normal btn" href="/signup">企业内部专利快速查询</a>
+                <a class="signup btn-normal btn" href="/signup">更好的企业内部协作工具</a>
                 <!--<a class="dload btn btn-secondary pop-btn">下载滴答清单</a>-->
             </div>
 

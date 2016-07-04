@@ -16,6 +16,7 @@
                         <img class="avatar" src="/static/images/avatar-new.png">
                     </a>
                     <span class="username t-name">{{account}}</span>
+                    <span class="logout-user" @click="logoutUser">注销</span>
                 </div>
 
             </div>
@@ -149,8 +150,9 @@
         created(){
 
         },
-        ready(){
-
+        created(){
+            let byAll =  this.$route.query.filterby
+            this.filteDatas(filterFuncs[byAll])
         },
         methods:{
             showAll(){
@@ -160,22 +162,33 @@
                 this.showTip = false
             },
             getAllThings(){
+                this.$router.go({ name: 'contain', query: { 'filterby': 'byAll' }})
                 this.filteDatas(filterFuncs.byAll)
             },
             getImportantThings(){
+                this.$router.go({ name: 'contain', query: { 'filterby': 'byUrgent' }})
                 this.filteDatas(filterFuncs.byUrgent)
             },
             getNormalThings(){
+                this.$router.go({ name: 'contain', query: { 'filterby': 'byNormal' }})
                 this.filteDatas(filterFuncs.byNormal)
             },
             getWhateverThings(){
+                this.$router.go({ name: 'contain', query: { 'filterby': 'byWhatever' }})
                 this.filteDatas(filterFuncs.byWhatever)
             },
             getOneHourThings(){
+                this.$router.go({ name: 'contain', query: { 'filterby': 'byOneHour' }})
                 this.filteDatas(filterFuncs.byOneHour)
             },
             getOneDayThings(){
+                this.$router.go({ name: 'contain', query: { 'filterby': 'byOneDay' }})
                 this.filteDatas(filterFuncs.byOneDay)
+            },
+            logoutUser(){
+
+                window.localStorage.setItem('user_id','');
+                this.$router.go({name:'login'})
             }
         },
         transitions: {
@@ -261,6 +274,10 @@
         cursor: pointer;
         background: rgba(255,255,255,.3);
     }
+    #project-list-view ul li.active-li{
+        cursor: pointer;
+        background: rgba(255,255,255,.3);
+    }
     #project-list-view ul li.tkcalendar{
         padding: 0;
     }
@@ -286,6 +303,11 @@
     }
     .list-group{
         margin-bottom: 1em;
+    }
+    .logout-user{
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 60px;
     }
 
 </style>
